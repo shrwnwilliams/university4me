@@ -1,13 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 import API from "./utils/API"
+import { useEffect } from 'react';
 
 function App() {
 
-    getSchools = () => {
-      API.getAll().then()
+   const getSchools = () => {
+      API.getAll().then(function (res){
+        console.log(res.json());
+      })
     }
 
+    
+    useEffect(()=>{
+      getSchools();
+    }, [])
+    
   return (
     <div className="App">
       <header className="App-header">
