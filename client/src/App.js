@@ -1,7 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import API from "./utils/API"
 
 function App() {
+
+    getSchools = () => {
+      API.getAll().then()
+    }
+
   return (
     <div className="App">
       <header className="App-header">
