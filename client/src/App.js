@@ -11,9 +11,14 @@ function App() {
       })
     }
 
+    const getByState = () => {
+      API.getByState()
+    }
+
     
     useEffect(()=>{
-      getSchools();
+      // getSchools();
+      getByState();
     }, [])
     
   return (
