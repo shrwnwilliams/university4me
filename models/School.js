@@ -7,14 +7,26 @@ const schoolSchema = new Schema({
         required: true,
         unique: true 
     },
-    username: {
+    school: {
         type: String,
-
+        required: true
     },
-    password: {
+    city: {
         type: String,
-        
-    }
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    zipcode: {
+        type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
+    },
     
   });
   
