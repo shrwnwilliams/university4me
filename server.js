@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const routes = require("./routes");
+const path = require("path")
 // const School = require ("./models/School")
 
 const PORT = process.env.PORT || 3001;
