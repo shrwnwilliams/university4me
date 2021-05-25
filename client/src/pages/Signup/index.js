@@ -12,15 +12,16 @@ function Signup() {
   };
 
   return (
-    <div className='container' style={{margin: '0px', maxHeight: '100%', height:'100%', maxWidth: '100%'}}>
-      <div className='h-25 d-flex align-items-center justify-content-center'>
-        <div>
-            <h2>Login / Signup</h2>
-        </div>
-        <form onSubmit={handleSubmit}>
-            <div className="col-sm-6 mt-3 px-5">
-            <div className="row form-group">
-                <div className="col-sm-6">
+    <div>
+      <div className="row">
+        <div className='col-sm-4'></div>
+        <div className="col-sm-4 p-5 text-center">
+            <form onSubmit={handleSubmit}>
+            <div className='col-sm-12 pb-5'>
+                <h2>Login / Signup</h2>
+            </div>
+            <div className="row form-group justify-content-center">
+                <div className="col-sm-8">
                 <input
                     className="form-control"
                     type="text"
@@ -30,8 +31,8 @@ function Signup() {
                 />
                 </div>
             </div>
-            <div className="row form-group">
-                <div className="col-sm-6">
+            <div className="row form-group justify-content-center">
+                <div className="col-sm-8">
                 <input
                     className="form-control"
                     type="text"
@@ -44,8 +45,8 @@ function Signup() {
             <button className='btn btn-success' type='submit'>
                 Submit
             </button>
-            </div>
         </form>
+        </div>
         <link 
         rel="stylesheet" 
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
