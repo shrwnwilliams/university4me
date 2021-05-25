@@ -33,3 +33,14 @@ const schoolSchema = new Schema({
   const School = mongoose.model("School", schoolSchema);
   
   module.exports = School;
+
+  
+// School.create({
+//     id: "1",
+//     school: "school",
+//     city: "city",
+//     state: "state",
+//     zipcode: "zip",
+//     url: "url",
+// }).then (schoolModel => console.log(schoolModel))
+// .catch (err => console.log(err))
