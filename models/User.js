@@ -33,7 +33,6 @@ const userSchema = new Schema({
   userSchema.statics.authenticate = function (username, password, callback) {
       console.log(username)
     User.findOne({ username: username })
-    console.log(username)
       .exec(function (err, user) {
         if (err) {
           return callback(err)
@@ -44,6 +43,7 @@ const userSchema = new Schema({
         } else {
         bcrypt.compare(password , user.password, function (err, result) {
           if (result === true) {
+              console.log("hey man you made it");
             return callback(null, user);
           } else {
             return callback('Wrong password!');

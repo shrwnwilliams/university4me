@@ -12,7 +12,7 @@ import Search from "./pages/Search";
 function App() {
   const getSchools = () => {
     API.getAll().then(function (res) {
-      console.log(res.json());
+      // console.log(res.json());
     });
   };
 
