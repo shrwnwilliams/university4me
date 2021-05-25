@@ -70,4 +70,19 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  findById: function (req, res) {
+    // const id = req.params.id;
+    fetch(
+      "https://api.data.gov/ed/collegescorecard/v1/schools.json?id=101541&page=0&per_page=30&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  },
 };
