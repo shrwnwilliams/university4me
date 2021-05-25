@@ -1,0 +1,53 @@
+.tags a {
+    text-decoration: none;
+}
+
+.tags a:hover {
+    text-decoration: none;
+}
+
+.tags {
+    background-color: #3a3a3a;
+    color: #f5f5f5;
+    font-size: 3vh;
+    transition: .3s ease-in;
+    margin: 4vh;
+    padding: 4vh;
+    border: 2px solid #3a3a3a;
+}
+
+.tags:hover {
+    color: #3a3a3a;
+    background-color: #cecece;
+    
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    background-size: cover;
+    background-image: url('../../img/image1.jpg');
+}
+
+.header.active {
+    opacity: 1;
+}
+
+.bgd-1 {
+    background-image: url('../../img/image2.jpg');
+}
+
+.bgd-2 {
+    background-image: url('../../img/image3.jpg');
+}
+
+.bgd-3 {
+    background-image: url('../../img/image4.jpg');
+}
+
+.bgd-4 {
+    background-image: url('../../img/image1.jpg');
+}
