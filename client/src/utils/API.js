@@ -4,8 +4,8 @@ export default {
   getAll: function (page) {
     return axios.get("/api/school/all/" + page);
   },
-  getByState: function (state) {
-    return axios.get("/api/school/state/" + state);
+  getByState: function (state, page) {
+    return axios.get("/api/school/state/" + state + "/" + page);
   },
   getByCity: function (city) {
     return axios.get("/api/school/city/" + city);

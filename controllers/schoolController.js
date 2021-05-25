@@ -29,11 +29,14 @@ module.exports = {
       });
   },
   findByState: function (req, res) {
+    const page = req.params.page;
     const state = req.params.state;
     fetch(
       "https://api.data.gov/ed/collegescorecard/v1/schools.json?school.state=" +
         state +
-        "&page=0&per_page=30&school.operating__not=0&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
+        "&school.operating__not=0&fields=school.city,school.state,school.zip,school.school_url,school.name,id,latest.student.size,latest.cost.tuition.in_state,latest.cost.tuition.out_of_state,latest.cost.tuition.program_year,latest.admissions.admission_rate.overall,latest.admissions.act_scores.midpoint,latest.admissions.sat_scores.midpoint&page=" +
+        page +
+        "&per_page=30&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
     )
       .then((response) => {
         return response.json();
@@ -47,11 +50,14 @@ module.exports = {
       });
   },
   findByCity: function (req, res) {
+    const page = req.params.page;
     const city = req.params.city;
     fetch(
       "https://api.data.gov/ed/collegescorecard/v1/schools.json?school.city=" +
         city +
-        "&page=0&per_page=30&school.operating__not=0&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
+        "&school.operating__not=0&fields=school.city,school.state,school.zip,school.school_url,school.name,id,latest.student.size,latest.cost.tuition.in_state,latest.cost.tuition.out_of_state,latest.cost.tuition.program_year,latest.admissions.admission_rate.overall,latest.admissions.act_scores.midpoint,latest.admissions.sat_scores.midpoint&page=" +
+        page +
+        "&per_page=30&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
     )
       .then((response) => {
         return response.json();
@@ -65,6 +71,7 @@ module.exports = {
       });
   },
   findByName: function (req, res) {
+    const page = req.params.page;
     const name = req.params.name;
     fetch(
       "https://api.data.gov/ed/collegescorecard/v1/schools.json?school.name=" +
@@ -101,6 +108,7 @@ module.exports = {
       });
   },
   findByDistance: function (req, res) {
+    const page = req.params.page;
     const zip = req.params.zip;
     const dis = req.params.dis;
     fetch(
