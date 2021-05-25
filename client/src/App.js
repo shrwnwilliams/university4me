@@ -10,15 +10,15 @@ import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
 
 function App() {
-  const getSchools = () => {
-    API.getAll().then(function (res) {
-      console.log(res.json());
-    });
-  };
+  // const getSchools = () => {
+  //   API.getAll().then(function (res) {
+  //     console.log(res.json());
+  //   });
+  // };
 
-  useEffect(() => {
-    getSchools();
-  }, []);
+  // useEffect(() => {
+  //   getSchools();
+  // }, []);
 
   return (
     <Router>
