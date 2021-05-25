@@ -10,15 +10,74 @@ import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
 
 function App() {
-  // const getSchools = () => {
-  //   API.getAll().then(function (res) {
-  //     console.log(res.json());
-  //   });
-  // };
+  const getAllSchools = () => {
+    API.getAll()
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // useEffect(() => {
-  //   getSchools();
-  // }, []);
+  const getByState = () => {
+    API.getByState("NY")
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getByCity = () => {
+    API.getByCity("Syracuse")
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getByName = () => {
+    API.getByName("syr")
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getById = () => {
+    API.getById(196413)
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getByDistance = () => {
+    API.getByDistance(13214, 10)
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    // getAllSchools();
+    // getByState();
+    // getByCity();
+    // getByName();
+    // getById();
+    // getByDistance();
+  }, []);
 
   return (
     <Router>
