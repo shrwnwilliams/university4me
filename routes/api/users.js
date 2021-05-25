@@ -1,9 +1,10 @@
 const router = require("express").Router();
-const { User } = require("../../models/User")
+const User = require("../../models/User")
 
 // Create a user for signup
 router.post('/signup',function(req,res){
     var userObj = new User({
+        userid: req.body.userid,
         username : req.body.username,
         password : req.body.password
     });
