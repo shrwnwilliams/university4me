@@ -24,6 +24,7 @@ app.use(routes);
 // }).then (schoolModel => console.log(schoolModel))
 // .catch (err => console.log(err))
 
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/schooldb", 
 {
   useNewUrlParser: true,

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models")
+const { User } = require("../../models/User")
 
 // Create a user for signup
 router.post('/signup',function(req,res){
@@ -33,4 +33,6 @@ router.post('/login', function (req, res, next) {
      return next(err);
    }
  });
+
+ module.exports = router;
 
