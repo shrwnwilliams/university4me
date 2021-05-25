@@ -5,5 +5,6 @@ router.route("/all").get(schoolController.findAll);
 router.route("/state/:state").get(schoolController.findByState);
 router.route("/city/:city").get(schoolController.findByCity);
 router.route("/:name").get(schoolController.findByName);
+router.route("/id").get(schoolController.findById);
 
 module.exports = router;
