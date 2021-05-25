@@ -11,14 +11,14 @@ import Search from "./pages/Search";
 
 function App() {
   const getAllSchools = () => {
-    API.getAll()
+    API.getAll(0)
       .then(function (res) {
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+    };
 
   const getByState = () => {
     API.getByState("NY")
@@ -70,14 +70,17 @@ function App() {
       });
   };
 
+
   useEffect(() => {
-    // getAllSchools();
+    getAllSchools();
     // getByState();
     // getByCity();
     // getByName();
     // getById();
     // getByDistance();
   }, []);
+
+
 
   return (
     <Router>

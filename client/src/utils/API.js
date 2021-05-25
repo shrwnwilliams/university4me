@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default {
-  getAll: function () {
-    return axios.get("/api/school/all");
+  getAll: function (page) {
+    return axios.get("/api/school/all/" + page);
   },
   getByState: function (state) {
     return axios.get("/api/school/state/" + state);

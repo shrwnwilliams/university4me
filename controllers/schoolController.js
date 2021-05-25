@@ -5,16 +5,22 @@ const fetch = require("node-fetch");
 
 // school.operating__not=0&
 
+// state checking for every parameter, which, if they're there, they concat onto api call
+// store input in state
+
 module.exports = {
   findAll: function (req, res) {
+    const page = req.params.page;
     fetch(
-      "https://api.data.gov/ed/collegescorecard/v1/schools.json?page=0&per_page=30&school.operating__not=0&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
+      "https://api.data.gov/ed/collegescorecard/v1/schools.json?page=" +
+        page +
+        "&per_page=30&school.operating__not=0&fields=school.city,school.state,school.zip,school.school_url,school.name,id,latest.student.size,latest.cost.tuition.in_state,latest.cost.tuition.out_of_state,latest.cost.tuition.program_year,latest.admissions.admission_rate.overall,latest.admissions.act_scores.midpoint,latest.admissions.sat_scores.midpoint&page=0&per_page=30&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
     )
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
       })
       .catch((err) => {
