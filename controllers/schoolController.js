@@ -3,6 +3,8 @@ const { response } = require("express");
 const fetch = require("node-fetch");
 // const db = require("../models");
 
+// school.operating__not=0&
+
 module.exports = {
   findAll: function (req, res) {
     fetch(
@@ -70,4 +72,38 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  findById: function (req, res) {
+    // const id = req.params.id;
+    fetch(
+      "https://api.data.gov/ed/collegescorecard/v1/schools.json?id=101541&page=0&per_page=30&api_key=nd99fVPekGDGKSjaZ64uf9yEA7pvkWBod1HYhWAK"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  },
 };
+
+// school: {
+//   zip: '13211-1003', NO
+//   city: 'Mattydale', YES
+//   name: 'Continental School of Beauty Culture-Mattydale', YES
+//   alias: null,
+//   state: 'NY', YES
+//   locale: 21, YES
+//   search: 'Continental School of Beauty Culture-Mattydale',
+//   branches: 2, YES
+//   men_only: 0, YES
+//   operating: 1, YES
+// id: 467094, YES
+// student: {
+//   size: 14759, YES
+// }
+// cost: {
+//   tuition: { in_state: 51853, out_of_state: 51853, program_year: null }, YES
+// }

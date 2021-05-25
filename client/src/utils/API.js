@@ -12,5 +12,8 @@ export default {
     },
     getByName: function(){
         return axios.get("api/school/:name")
+    },
+    getById: function(){
+        return axios.get("api/school/:id")
     }
 };
