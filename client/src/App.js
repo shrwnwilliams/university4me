@@ -93,9 +93,13 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/home" component={Homepage} />
           <Route exact path="/search" component={Search} />
+<<<<<<< HEAD
+          <Route path="/signup" exact component={Signup} />
+=======
           <Route exact path='/profile' component={User} />
           <Route exact path='/login' component={Signup} />
           {/* <Route exact path="/login" component={Login} /> */}
+>>>>>>> 20483e3b7ba901fdb4f8fdd638ff3439b9d1d694
         </Wrapper>
         <Footer />
       </div>
