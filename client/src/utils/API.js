@@ -7,16 +7,16 @@ export default {
   getByState: function (state, page) {
     return axios.get("/api/school/state/" + state + "/" + page);
   },
-  getByCity: function (city) {
-    return axios.get("/api/school/city/" + city);
+  getByCity: function (city, page) {
+    return axios.get("/api/school/city/" + city + "/" + page);
   },
-  getByName: function (name) {
-    return axios.get("api/school/name/" + name);
+  getByName: function (name, page) {
+    return axios.get("api/school/name/" + name + "/" + page);
   },
   getById: function (id) {
     return axios.get("api/school/id/" + id);
   },
-  getByDistance: function (zip, dis) {
-    return axios.get("api/school/" + zip + "/" + dis);
+  getByDistance: function (zip, dis, page) {
+    return axios.get("api/school/dis/" + zip + "/" + dis + "/" + page);
   },
 };
