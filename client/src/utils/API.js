@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const API = axios.create({ baseURL: 'http://localhost3001' });
+
 export default {
   getAll: function (page) {
     return axios.get("/api/school/all/" + page);
@@ -20,3 +22,6 @@ export default {
     return axios.get("api/school/dis/" + zip + "/" + dis + "/" + page);
   },
 };
+
+export const signIn = (formData) => API.post('/api/user/login', formData);
+export const signUp = (formData) => API.post('/api/user/signup', formData);

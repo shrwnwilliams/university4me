@@ -1,16 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+
 // import Navbar from '../../components/Navbar';
+import { signin, signup } from '../../actions/auth'
 
 const initialState = { username: "", password: "" };
 
 function Signup() {
   const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    if (isSignup) {
+      dispatch(signup(formData, history))
+    } else {
+      dispatch(signin(formData, history))
+    }
+    
   };
 
   const handleChange = (e) => {
