@@ -6,8 +6,8 @@ html, body {
     overflow-x: hidden;
 }
 
-.page {
-    background-color: #274b69;
+.backdrop {
+    background-color:#274b69;
 }
 
 .overlay {
@@ -21,4 +21,5 @@ html, body {
 .userinfo {
     background-color: #b9c2d4;
     padding: 5vh;
+    height: 40vh;
 }
