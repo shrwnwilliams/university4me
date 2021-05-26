@@ -8,6 +8,7 @@ import Wrapper from "./components/Wrapper";
 import Footer from "./components/Footer";
 import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const getAllSchools = () => {
