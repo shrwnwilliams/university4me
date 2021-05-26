@@ -6,6 +6,7 @@ import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
 // import SearchResults from "../components/SearchResults";
 import { Card } from "react-bootstrap";
+import CollegeCard from "../../components/CollegeCard";
 
 class Search extends Component {
   state = {
@@ -20,7 +21,7 @@ class Search extends Component {
   componentDidMount() {
     API.getAll()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ colleges: res.data.results });
       })
       .catch((err) => console.log(err));
@@ -38,8 +39,9 @@ class Search extends Component {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ results: res.data.results, error: "" });
+        console.log(this.state.results);
       })
       .catch((err) => this.setState({ error: err.message }));
   };
@@ -97,6 +99,7 @@ class Search extends Component {
       //     />
       //   </Container>
       // </div>
+      <div>
       <div className="accordion" id="accordionExample">
         <div className="card">
           <div className="card-header" id="headingOne">
@@ -228,6 +231,8 @@ class Search extends Component {
             </div>
           </div>
         </div>
+      </div>
+      <CollegeCard colleges={this.state.results} />
       </div>
     );
   }
