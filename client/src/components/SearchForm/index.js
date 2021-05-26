@@ -17,11 +17,11 @@ function SearchForm(props) {
           placeholder="Type in the name of the college"
           id="college"
         />
-        <datalist id="colleges">
+        {/* <datalist id="colleges">
           {props.colleges.map(college => (
             <option value={college} key={college} />
           ))}
-        </datalist>
+        </datalist> */}
         <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
           Search
         </button>
