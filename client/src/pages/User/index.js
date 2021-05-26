@@ -20,7 +20,7 @@ const User = () => {
                 <div className='userinfo'>
                     <div>
                         <h3>Username: { User.username }</h3>
-                        <h4>User-Id: { User.userid }</h4>
+                        <h4>User-Id: { User._id }</h4>
                     </div>
                     <div className='col-sm-3'>
                         <form onSubmit={handler}>
