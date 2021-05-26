@@ -1,38 +1,39 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
 import style from "./style.css";
+import background from "../../img/image1.jpg";
 
 const Homepage = () => {
-//   const {imgClassList} = props;
-//   const {activeImgClass} = state;
+  //   const {imgClassList} = props;
+  //   const {activeImgClass} = state;
   return (
-    <div>
-      <div className='header-container'>
-          {/* {imgClassList.map(imgClass => {
+    <div className="page">
+      <div className="header-container">
+        {/* {imgClassList.map(imgClass => {
               return (
                 <div className={`header ${(imgClass === activeImgClass)? 'active' : ''}`} />
               )
           })} */}
       </div>
       <div className="row">
-        <div className="col-sm-5">
+        <div className="col-sm-5 ml-5">
           <div className="d-flex flex-column bd-highlight col-sm-12">
             <div className="tags text-center">
               <a>Search for Schools!</a>
             </div>
             <div className="tags text-center">
-              <a>Click Here</a>
+              <a>View Your Favorites</a>
             </div>
             <div className="tags text-center">
-              <a>Click Here</a>
+              <a>Learn About Us</a>
             </div>
             <div className="tags text-center">
-              <a>Click Here</a>
+              <a>Contact Us</a>
             </div>
           </div>
         </div>
-        <div className="col-sm-7 p-5">
-          <h3>Title</h3>
+        <div className="para col-sm-6 ml-4">
+          <h3>Lorem Ipsum Dolor Sit</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Pellentesque iaculis augue a eros rhoncus mattis. Nam mi ante,
