@@ -12,8 +12,9 @@ function CollegeCardBody (props) {
 {props["school.city"]}, {props["school.state"]} {props["school.zip"].split("-")[0]}
           </p>
           <a href={props["school.school_url"]} target="_blank" rel="noreferer noopener" class="btn btn-primary">
-            Go somewhere
+            Check out their website!
           </a>
+          <button className="mx-2 btn btn-secondary" data-id={props.id}>Add to favorites</button>
         </div>
 
       </div>
