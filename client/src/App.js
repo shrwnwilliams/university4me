@@ -92,7 +92,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/home" component={Homepage} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/signup" component={Signup} />
+          <Route path="/signup" exact component={Signup} />
         </Wrapper>
         <Footer />
       </div>

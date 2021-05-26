@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-
 // import Navbar from '../../components/Navbar';
 import { signin, signup } from '../../actions/auth'
+import { AUTH } from '../../constants/actionTypes';
 
 const initialState = { username: "", password: "" };
 
@@ -16,6 +16,7 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData)
 
     if (isSignup) {
       dispatch(signup(formData, history))
