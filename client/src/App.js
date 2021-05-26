@@ -8,6 +8,8 @@ import Wrapper from "./components/Wrapper";
 import Footer from "./components/Footer";
 import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
+import User from './pages/User';
+import Signup from './pages/Signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -91,6 +93,8 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/home" component={Homepage} />
           <Route exact path="/search" component={Search} />
+          <Route exact path='/profile' component={User} />
+          <Route exact path='/login' component={Signup} />
           {/* <Route exact path="/login" component={Login} /> */}
         </Wrapper>
         <Footer />

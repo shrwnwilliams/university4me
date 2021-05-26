@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
 import style from "./style.css";
-import background from '../../img/image1.jpg';
+import background from "../../img/image1.jpg";
 
 const Homepage = () => {
-//   const {imgClassList} = props;
-//   const {activeImgClass} = state;
+  //   const {imgClassList} = props;
+  //   const {activeImgClass} = state;
   return (
-    <div className='page'>
-      <div className='header-container'>
-          {/* {imgClassList.map(imgClass => {
+    <div className="page">
+      <div className="header-container">
+        {/* {imgClassList.map(imgClass => {
               return (
                 <div className={`header ${(imgClass === activeImgClass)? 'active' : ''}`} />
               )
