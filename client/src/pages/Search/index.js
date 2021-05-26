@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import SearchForm from "../../components/SearchForm";
+import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
 // import SearchResults from "../components/SearchResults";
-import { Card } from 'react-bootstrap';
+import { Card } from "react-bootstrap";
 
 class Search extends Component {
   state = {
     search: "",
+    cities: [],
     states: [],
     colleges: [],
     results: [],
@@ -60,6 +62,24 @@ class Search extends Component {
       .catch((err) => this.setState({ error: err.message }));
   };
 
+  // SearchByCity
+  handleInputChangeForCity = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleFormSubmitForCity = (event) => {
+    event.preventDefault();
+    API.getByCity(this.state.search)
+      .then((res) => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        console.log(res.data);
+        this.setState({ results: res.data.results, error: "" });
+      })
+      .catch((err) => this.setState({ error: err.message }));
+  };
+
   render() {
     return (
       // <div>
@@ -89,7 +109,7 @@ class Search extends Component {
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-                search by College Name
+                Search by College Name
               </button>
             </h2>
           </div>
@@ -141,6 +161,40 @@ class Search extends Component {
                     handleFormSubmit={this.handleFormSubmitForStates}
                     handleInputChange={this.handleInputChangeForStates}
                     states={this.state.states}
+                  />
+                </Container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-header" id="headingThree">
+            <h2 className="mb-0">
+              <button
+                className="btn btn-link btn-block text-left collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Search College by City
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseThree"
+            className="collapse"
+            aria-labelledby="headingThree"
+            data-parent="#accordionExample"
+          >
+            <div className="card-body">
+              <div>
+                <Container style={{ minHeight: "80%" }}>
+                  <SearchByCity
+                    handleFormSubmitForCity={this.handleFormSubmitForCity}
+                    handleInputChangeForCity={this.handleInputChangeForCity}
+                    cities={this.state.cities}
                   />
                 </Container>
               </div>
