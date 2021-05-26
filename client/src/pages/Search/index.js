@@ -4,14 +4,17 @@ import Container from "../../components/Container";
 import SearchForm from "../../components/SearchForm";
 import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
+import SearchByDistance from "../../components/SearchByDistance";
 // import SearchResults from "../components/SearchResults";
 import { Accordion, Button, Card } from "react-bootstrap";
+import CollegeCard from "../../components/CollegeCard";
 
 class Search extends Component {
   state = {
     search: "",
     cities: [],
     states: [],
+    distances: [],
     colleges: [],
     results: [],
     error: "",
@@ -20,7 +23,7 @@ class Search extends Component {
   componentDidMount() {
     API.getAll()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ colleges: res.data.results });
       })
       .catch((err) => console.log(err));
@@ -38,8 +41,9 @@ class Search extends Component {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ results: res.data.results, error: "" });
+        console.log(this.state.results);
       })
       .catch((err) => this.setState({ error: err.message }));
   };
@@ -70,6 +74,24 @@ class Search extends Component {
   handleFormSubmitForCity = (event) => {
     event.preventDefault();
     API.getByCity(this.state.search)
+      .then((res) => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        console.log(res.data);
+        this.setState({ results: res.data.results, error: "" });
+      })
+      .catch((err) => this.setState({ error: err.message }));
+  };
+
+  // SearchByDistance
+  handleInputChangeForDist = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleFormSubmitForDist = (event) => {
+    event.preventDefault();
+    API.getByDistance(this.state.search)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -179,13 +201,14 @@ class Search extends Component {
                   <SearchByDistance
                     handleFormSubmitForDist={this.handleFormSubmitForDist}
                     handleInputChangeForDist={this.handleInputChangeForDist}
-                    distance={this.state.distance}
+                    distances={this.state.distances}
                   />
                 </Container>
               </div>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
+        <CollegeCard colleges={this.state.results} />
       </Accordion>
     );
   }
