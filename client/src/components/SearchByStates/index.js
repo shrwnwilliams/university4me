@@ -11,7 +11,7 @@ function SearchByStates(props) {
       <select
         className="custom-select"
         id="inputGroupSelect01"
-        onChange={props.handleInputChange}
+        onChange={props.handleInputChangeForStates}
       >
         <option defaultValue>Choose...</option>
         <option value="AK">AK</option>
@@ -67,7 +67,7 @@ function SearchByStates(props) {
         <option value="WV">WV</option>
         <option value="WY">WY</option>
       </select>
-      <button onClick={props.handleFormSubmit}>Submit</button>
+      <button onClick={props.handleFormSubmitForStates}>Submit</button>
     </div>
   );
 }
