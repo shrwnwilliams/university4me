@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import SearchForm from "../../components/SearchForm";
 import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
+import SearchByDistance from "../../components/SearchByDistance";
 // import SearchResults from "../components/SearchResults";
 import { Accordion, Button, Card } from "react-bootstrap";
 import CollegeCard from "../../components/CollegeCard";
@@ -13,6 +14,7 @@ class Search extends Component {
     search: "",
     cities: [],
     states: [],
+    distances: [],
     colleges: [],
     results: [],
     error: "",
@@ -72,6 +74,24 @@ class Search extends Component {
   handleFormSubmitForCity = (event) => {
     event.preventDefault();
     API.getByCity(this.state.search)
+      .then((res) => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        console.log(res.data);
+        this.setState({ results: res.data.results, error: "" });
+      })
+      .catch((err) => this.setState({ error: err.message }));
+  };
+
+  // SearchByDistance
+  handleInputChangeForDist = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleFormSubmitForDist = (event) => {
+    event.preventDefault();
+    API.getByDistance(this.state.search)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -181,7 +201,7 @@ class Search extends Component {
                   <SearchByDistance
                     handleFormSubmitForDist={this.handleFormSubmitForDist}
                     handleInputChangeForDist={this.handleInputChangeForDist}
-                    distance={this.state.distance}
+                    distances={this.state.distances}
                   />
                 </Container>
               </div>
