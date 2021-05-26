@@ -5,7 +5,7 @@ import SearchForm from "../../components/SearchForm";
 import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
 // import SearchResults from "../components/SearchResults";
-import { Card } from "react-bootstrap";
+import { Accordion, Button, Card } from "react-bootstrap";
 
 class Search extends Component {
   state = {
@@ -97,30 +97,17 @@ class Search extends Component {
       //     />
       //   </Container>
       // </div>
-      <div className="accordion" id="accordionExample">
-        <div className="card">
-          <div className="card-header" id="headingOne">
+      <Accordion defaultActiveKey="0">
+        <Card>
+          <Card.Header id="headingOne">
             <h2 className="mb-0">
-              <button
-                className="btn btn-link btn-block text-left"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Search by College Name
-              </button>
+              </Accordion.Toggle>
             </h2>
-          </div>
-
-          <div
-            id="collapseOne"
-            className="collapse show"
-            aria-labelledby="headingOne"
-            data-parent="#accordionExample"
-          >
-            <div className="card-body">
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
               <div>
                 <Container style={{ minHeight: "80%" }}>
                   <SearchForm
@@ -130,31 +117,19 @@ class Search extends Component {
                   />
                 </Container>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-header" id="headingTwo">
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header id="headingOne">
             <h2 className="mb-0">
-              <button
-                className="btn btn-link btn-block text-left collapsed"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapseTwo"
-                aria-expanded="false"
-                aria-controls="collapseTwo"
-              >
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Search College by State
-              </button>
+              </Accordion.Toggle>
             </h2>
-          </div>
-          <div
-            id="collapseTwo"
-            className="collapse"
-            aria-labelledby="headingTwo"
-            data-parent="#accordionExample"
-          >
-            <div className="card-body">
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
               <div>
                 <Container style={{ minHeight: "80%" }}>
                   <SearchByStates
@@ -164,31 +139,19 @@ class Search extends Component {
                   />
                 </Container>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-header" id="headingThree">
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header id="headingOne">
             <h2 className="mb-0">
-              <button
-                className="btn btn-link btn-block text-left collapsed"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapseThree"
-                aria-expanded="false"
-                aria-controls="collapseThree"
-              >
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Search College by City
-              </button>
+              </Accordion.Toggle>
             </h2>
-          </div>
-          <div
-            id="collapseThree"
-            className="collapse"
-            aria-labelledby="headingThree"
-            data-parent="#accordionExample"
-          >
-            <div className="card-body">
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
               <div>
                 <Container style={{ minHeight: "80%" }}>
                   <SearchByCity
@@ -198,37 +161,32 @@ class Search extends Component {
                   />
                 </Container>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-header" id="headingThree">
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header id="headingOne">
             <h2 className="mb-0">
-              <button
-                className="btn btn-link btn-block text-left collapsed"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapseThree"
-                aria-expanded="false"
-                aria-controls="collapseThree"
-              >
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Search College by Zipcode
-              </button>
+              </Accordion.Toggle>
             </h2>
-          </div>
-          <div
-            id="collapseThree"
-            className="collapse"
-            aria-labelledby="headingThree"
-            data-parent="#accordionExample"
-          >
-            <div className="card-body">
-              And lastly, the placeholder content for the third and final
-              accordion panel. This panel is hidden by default.
-            </div>
-          </div>
-        </div>
-      </div>
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <div>
+                <Container style={{ minHeight: "80%" }}>
+                  <SearchByDistance
+                    handleFormSubmitForDist={this.handleFormSubmitForDist}
+                    handleInputChangeForDist={this.handleInputChangeForDist}
+                    distance={this.state.distance}
+                  />
+                </Container>
+              </div>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
     );
   }
 }
