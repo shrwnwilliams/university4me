@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import SearchForm from "../../components/SearchForm";
+import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
 // import SearchResults from "../components/SearchResults";
-import { Card } from 'react-bootstrap';
+import { Card } from "react-bootstrap";
+import CollegeCard from "../../components/CollegeCard";
 
 class Search extends Component {
   state = {
     search: "",
+    cities: [],
     states: [],
     colleges: [],
     results: [],
@@ -18,7 +21,7 @@ class Search extends Component {
   componentDidMount() {
     API.getAll()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ colleges: res.data.results });
       })
       .catch((err) => console.log(err));
@@ -36,8 +39,9 @@ class Search extends Component {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ results: res.data.results, error: "" });
+        console.log(this.state.results);
       })
       .catch((err) => this.setState({ error: err.message }));
   };
@@ -50,6 +54,24 @@ class Search extends Component {
   handleFormSubmitForStates = (event) => {
     event.preventDefault();
     API.getByState(this.state.search)
+      .then((res) => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        console.log(res.data);
+        this.setState({ results: res.data.results, error: "" });
+      })
+      .catch((err) => this.setState({ error: err.message }));
+  };
+
+  // SearchByCity
+  handleInputChangeForCity = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleFormSubmitForCity = (event) => {
+    event.preventDefault();
+    API.getByCity(this.state.search)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -77,6 +99,7 @@ class Search extends Component {
       //     />
       //   </Container>
       // </div>
+      <div>
       <div className="accordion" id="accordionExample">
         <div className="card">
           <div className="card-header" id="headingOne">
@@ -89,7 +112,7 @@ class Search extends Component {
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-                search by College Name
+                Search by College Name
               </button>
             </h2>
           </div>
@@ -158,6 +181,40 @@ class Search extends Component {
                 aria-expanded="false"
                 aria-controls="collapseThree"
               >
+                Search College by City
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseThree"
+            className="collapse"
+            aria-labelledby="headingThree"
+            data-parent="#accordionExample"
+          >
+            <div className="card-body">
+              <div>
+                <Container style={{ minHeight: "80%" }}>
+                  <SearchByCity
+                    handleFormSubmitForCity={this.handleFormSubmitForCity}
+                    handleInputChangeForCity={this.handleInputChangeForCity}
+                    cities={this.state.cities}
+                  />
+                </Container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-header" id="headingThree">
+            <h2 className="mb-0">
+              <button
+                className="btn btn-link btn-block text-left collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
                 Search College by Zipcode
               </button>
             </h2>
@@ -174,6 +231,8 @@ class Search extends Component {
             </div>
           </div>
         </div>
+      </div>
+      <CollegeCard colleges={this.state.results} />
       </div>
     );
   }
