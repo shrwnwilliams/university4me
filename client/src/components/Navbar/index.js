@@ -49,9 +49,9 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <Link
-              to="/login"
+              to="/signup"
               className={
-                window.location.pathname === "/login"
+                window.location.pathname === "/signup"
                   ? "nav-link active"
                   : "nav-link"
               }
