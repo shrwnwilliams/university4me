@@ -16,7 +16,7 @@ function CollegeCardBody (props) {
           </a>
           <button className="mx-2 btn btn-secondary" data-id={props.id}>Add to favorites</button>
         </div>
-
+      
       </div>
     )
 }
