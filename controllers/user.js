@@ -52,7 +52,9 @@ module.exports = {
       const hashedPassword = await bcrypt.hash(password, 12);
 
       const result = await User.create({ username, password: hashedPassword });
+
       console.log(result);
+
       const token = jwt.sign(
         { username: result.username, id: result._id },
         secret,
@@ -60,6 +62,7 @@ module.exports = {
       );
 
       res.status(200).json({ result, token });
+      
     } catch (err) {
       res.status(500).json({ message: "Something went wrong." });
       console.log(err);

@@ -2,15 +2,15 @@
 import axios from "axios";
 
 // LOOK INTO THIS
-const API = axios.create({ baseURL: 'https://localhost3001' });
+// const API = axios.create({ baseURL: 'https://localhost3001' });
 
-API.interceptors.request.use((req) => {
-  if (localStorage.getItem('profile')) {
-    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
-  }
-  console.log(req)
-  return req;
-});
+// API.interceptors.request.use((req) => {
+//   if (localStorage.getItem('profile')) {
+//     req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+//   }
+//   console.log(req)
+//   return req;
+// });
 
 export default {
   getAll: function (page) {
@@ -33,5 +33,5 @@ export default {
   },
 };
 // do axios.post and put in ^
-export const signIn = (formData) => API.post('/api/user/login', formData);
-export const signUp = (formData) => API.post('/api/user/signup', formData);
+// export const signIn = (formData) => API.post('/api/user/login', formData);
+// export const signUp = (formData) => API.post('/api/user/signup', formData);
