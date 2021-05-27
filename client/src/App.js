@@ -75,7 +75,7 @@ function App() {
 
 
   useEffect(() => {
-    // getAllSchools();
+    getAllSchools();
     // getByState();
     // getByCity();
     // getByName();
