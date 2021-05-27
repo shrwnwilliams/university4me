@@ -5,7 +5,6 @@ import SearchForm from "../../components/SearchForm";
 import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
 import SearchByDistance from "../../components/SearchByDistance";
-import SearchByZipcode from "../../components/SearchByZipcode";
 // import SearchResults from "../components/SearchResults";
 import { Accordion, Button, Card } from "react-bootstrap";
 import CollegeCard from "../../components/CollegeCard";

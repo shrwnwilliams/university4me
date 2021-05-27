@@ -8,7 +8,7 @@ function SearchByCity(props) {
         <label htmlFor="city">City</label>
         <input
           value={props.search}
-          onChange={props.handleInputChange}
+          onChange={props.handleInputChangeForCity}
           name="city"
           list="cities"
           type="text"
@@ -16,12 +16,7 @@ function SearchByCity(props) {
           placeholder="Type in a city"
           id="city"
         />
-        <datalist id="cities">
-          {props.cities.map(city => (
-            <option value={city} key={city} />
-          ))}
-        </datalist>
-        <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+        <button type="submit" onClick={props.handleFormSubmitForCity} className="btn btn-success">
           Search
         </button>
       </div>
