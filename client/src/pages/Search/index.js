@@ -109,6 +109,7 @@ class Search extends Component {
 
   render() {
     return (
+      <div className="container">
       <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
@@ -202,6 +203,7 @@ class Search extends Component {
         </Card>
         <CollegeCard colleges={this.state.results} />
       </Accordion>
+      </div>
     );
   }
 }
