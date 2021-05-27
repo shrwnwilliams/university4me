@@ -15,7 +15,8 @@ class Search extends Component {
     search: "",
     cities: [],
     states: [],
-    distances: [],
+    distance: "",
+    zipcode: "",
     colleges: [],
     results: [],
     error: "",
@@ -85,14 +86,18 @@ class Search extends Component {
       .catch((err) => this.setState({ error: err.message }));
   };
 
-  // SearchByDistance
+  // SearchByDistance and Zipcode
   handleInputChangeForDist = (event) => {
-    this.setState({ search: event.target.value });
+    this.setState({ distance: event.target.value });
+  };
+
+  handleInputChangeForZip = (event) => {
+    this.setState({ zipcode: event.target.value });
   };
 
   handleFormSubmitForDist = (event) => {
     event.preventDefault();
-    API.getByDistance(this.state.search)
+    API.getByDistance(this.state.zipcode, this.state.distance)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -102,24 +107,6 @@ class Search extends Component {
       })
       .catch((err) => this.setState({ error: err.message }));
   };
-
-    // SearchByZipcode
-    handleInputChangeForZip = (event) => {
-      this.setState({ search: event.target.value });
-    };
-  
-    handleFormSubmitForZip = (event) => {
-      event.preventDefault();
-      API.getByDistance(this.state.search)
-        .then((res) => {
-          if (res.data.status === "error") {
-            throw new Error(res.data.message);
-          }
-          console.log(res.data);
-          this.setState({ results: res.data.results, error: "" });
-        })
-        .catch((err) => this.setState({ error: err.message }));
-    };
 
   render() {
     return (
@@ -159,8 +146,8 @@ class Search extends Component {
               <div>
                 <Container style={{ minHeight: "80%" }}>
                   <SearchByStates
-                    handleFormSubmit={this.handleFormSubmitForStates}
-                    handleInputChange={this.handleInputChangeForStates}
+                    handleFormSubmitForStates={this.handleFormSubmitForStates}
+                    handleInputChangeForStates={this.handleInputChangeForStates}
                     states={this.state.states}
                   />
                 </Container>
@@ -205,28 +192,9 @@ class Search extends Component {
                   <SearchByDistance
                     handleFormSubmitForDist={this.handleFormSubmitForDist}
                     handleInputChangeForDist={this.handleInputChangeForDist}
-                    distances={this.state.distances}
-                  />
-                </Container>
-              </div>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card><Card>
-          <Card.Header id="headingOne">
-            <h2 className="mb-0">
-              <Accordion.Toggle as={Button} variant="link" eventKey="4">
-                Search College by Zipcode
-              </Accordion.Toggle>
-            </h2>
-          </Card.Header>
-          <Accordion.Collapse eventKey="4">
-            <Card.Body>
-              <div>
-                <Container style={{ minHeight: "80%" }}>
-                  <SearchByZipcode
-                    handleFormSubmitForZip={this.handleFormSubmitForZip}
                     handleInputChangeForZip={this.handleInputChangeForZip}
-                    zipcodes={this.state.zipcodes}
+                    distance={this.state.distance}
+                    zipcode={this.state.zipcode}
                   />
                 </Container>
               </div>
