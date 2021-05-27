@@ -67,7 +67,7 @@ function SearchByStates(props) {
         <option value="WV">WV</option>
         <option value="WY">WY</option>
       </select>
-      <button onClick={props.handleFormSubmitForStates}>Submit</button>
+      <button type="submit" onClick={props.handleFormSubmitForStates} className="btn btn-success">Search</button>
     </div>
   );
 }
