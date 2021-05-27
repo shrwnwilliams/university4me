@@ -12,10 +12,6 @@ API.interceptors.request.use((req) => {
   }
   return req;
 },
-//  err => {
-//   console.log('am I here?')
-//   throw new Error(err.response.data.message);
-// }
 );
 
 export const signIn = (formData) => API.post('/api/user/login', formData);

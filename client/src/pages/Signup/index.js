@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -10,11 +10,8 @@ const initialState = { username: "", password: "" };
 function Signup() {
   const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const history = useHistory();
-  // console.log(user)
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,16 +23,11 @@ function Signup() {
     } else {
       dispatch(signin(formData, history))
     }
-    
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
-  // useEffect(() => {
-  //   setUser(JSON.parse(localStorage.getItem("profile")));
-  // }, []);
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);

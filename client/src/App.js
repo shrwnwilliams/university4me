@@ -98,8 +98,6 @@ function App() {
           <Route exact path='/profile' component={User} />
           <Route exact path='/signup' component={Signup} />
           <Route exact path="/:id" component={OneSchool} />
-          {/* <Route exact path='/login' component={Signup} /> */}
-          {/* <Route exact path="/login" component={Login} /> */}
         </Wrapper>
         <Footer />
       </div>
