@@ -6,15 +6,15 @@ function CollegeCardBody(props) {
   return (
     <div className="card">
       <div className="card-body">
-        <h5 className="card-title"><a href={props.id}>{props["school.name"]}</a></h5>
+        <h5 className="card-title"><a href={`/college/${props.id}`}>{props["school.name"]}</a></h5>
         <p className="card-text">
           {props["school.city"]}, {props["school.state"]}{" "}
           {props["school.zip"].split("-")[0]}
         </p>
         <a
-          href={props["school.school_url"]}
+          href={`${props["school.school_url"]}`}
+          rel="noreferer"
           target="_blank"
-          rel="noreferer noopener"
           className="btn btn-primary"
         >
           Check out their website!
@@ -26,5 +26,8 @@ function CollegeCardBody(props) {
     </div>
   );
 }
+
+// subroute for id so OneSchool doesn't show up on each page 
+// links without https:// linking back to this site instead of their own
 
 export default CollegeCardBody;

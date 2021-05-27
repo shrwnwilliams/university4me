@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import API from "../../utils/API";
 
-function OneSchool(props) {
+function OneSchool() {
   const [schoolState, setSchoolState] = useState({
+    id: "",
     name: "",
     city: "",
     state: "",
@@ -11,11 +12,14 @@ function OneSchool(props) {
     url: "",
   });
   const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
-    API.getById(id)
+    setSchoolState({ ...schoolState, id: id });
+    console.log(schoolState);
+    API.getById(schoolState.id)
       .then(function (res) {
-        console.log(res.data.results[0]);
+        console.log(res.data.results);
         setSchoolState({
           name: res.data.results[0]["school.name"],
           city: res.data.results[0]["school.city"],
@@ -31,19 +35,20 @@ function OneSchool(props) {
 
   return (
     <div className="container">
-      <div class="card">
-        <div class="card-header">{schoolState.name}</div>
-        <div class="card-body">
-          <h5 class="card-title"></h5>
-          <p class="card-text">
+      <div className="card">
+        <div className="card-header">{schoolState.name}</div>
+        <div className="card-body">
+          <h5 className="card-title">Hello</h5>
+          <p className="card-text">
             Located in {schoolState.city}, {schoolState.state} {schoolState.zip}
           </p>
+
           <a
             href={schoolState.url}
             target="_blank"
             rel="noreferer noopener"
             className="btn btn-primary"
-            class="btn btn-primary"
+            className="btn btn-primary"
           >
             Visit their website
           </a>
