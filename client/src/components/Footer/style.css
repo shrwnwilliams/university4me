@@ -1,15 +1,17 @@
 .footer {
-    min-height: 100px;
-    background: #aa5e5e;
-    position: relative;
-  }
-  
-  .footer span {
+  min-height: 100px;
+  background: #274b69;
+  position: relative;
+}
+
+.footer span {
+    align-self: flex-end;
+    color: white;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 3px;
-    background: #aa5e5e;
+    background: #274b69;
   }
   
