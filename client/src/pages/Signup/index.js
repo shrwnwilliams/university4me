@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 // import Navbar from '../../components/Navbar';
 import { signin, signup } from '../../actions/auth'
-import { AUTH } from '../../constants/actionTypes';
 
 const initialState = { username: "", password: "" };
 
@@ -16,14 +15,14 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
+
+    console.log("This is in signup index", formData)
 
     if (isSignup) {
       dispatch(signup(formData, history))
     } else {
       dispatch(signin(formData, history))
     }
-    
   };
 
   const handleChange = (e) => {
@@ -33,14 +32,6 @@ function Signup() {
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
   };
-  // const [username, setUsername] = useState();
-  // const [password, setPassword] = useState();
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("user is " + username);
-  //   console.log("pass is " + password);
-  // };
 
   return (
     <div>
@@ -59,7 +50,6 @@ function Signup() {
                   placeholder="Username"
                   name="username"
                   onChange={handleChange}
-                  // onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
             </div>
@@ -71,7 +61,6 @@ function Signup() {
                   placeholder="Password"
                   name="password"
                   onChange={handleChange}
-                  // onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -89,7 +78,7 @@ function Signup() {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
       </div>
     </div>

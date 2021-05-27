@@ -1,5 +1,7 @@
+// import { AUTH, LOGOUT } from "../constants/actionTypes.js"
 import * as actionType from '../constants/actionTypes.js';
 
+console.log("do i even get here? reducers auth.js")
 const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {
     case actionType.AUTH:
