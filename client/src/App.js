@@ -97,7 +97,7 @@ function App() {
           <Route exact path="/search" component={Search} />
           <Route path="/signup" exact component={Signup} />
           <Route exact path='/profile' component={User} />
-          <Route exact path="/college-page" component={OneSchool} />
+          <Route exact path="/:id" component={OneSchool} />
           {/* <Route exact path='/login' component={Signup} /> */}
           {/* <Route exact path="/login" component={Login} /> */}
         </Wrapper>
