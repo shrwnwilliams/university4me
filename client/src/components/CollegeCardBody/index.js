@@ -4,9 +4,9 @@ function CollegeCardBody(props) {
   // console.log(props)
 
   return (
-    <div className="card">
+    <div className="card my-3">
       <div className="card-body">
-        <h5 className="card-title"><a href={`/college/${props.id}`}>{props["school.name"]}</a></h5>
+        <h5 className="card-title"><a href={`/${props.id}`}>{props["school.name"]}</a></h5>
         <p className="card-text">
           {props["school.city"]}, {props["school.state"]}{" "}
           {props["school.zip"].split("-")[0]}
