@@ -11,6 +11,8 @@ import Search from "./pages/Search";
 import User from './pages/User';
 import Signup from './pages/Signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CollegeCard from "./components/CollegeCard";
+import OneSchool from "./components/OneSchool";
 
 function App() {
   const getAllSchools = () => {
@@ -95,6 +97,8 @@ function App() {
           <Route exact path="/search" component={Search} />
           <Route exact path='/profile' component={User} />
           <Route exact path='/signup' component={Signup} />
+          <Route exact path="/:id" component={OneSchool} />
+          {/* <Route exact path='/login' component={Signup} /> */}
           {/* <Route exact path="/login" component={Login} /> */}
         </Wrapper>
         <Footer />
