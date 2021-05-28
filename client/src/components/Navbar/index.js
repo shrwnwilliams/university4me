@@ -18,9 +18,9 @@ function Navbar() {
 
   useEffect(() => {
     setInterval(() => {
-      setUser(user);
+      setUser(JSON.parse(localStorage.getItem('profile')));
     })
-  }, [user], 1000);
+  }, [], 5000);
 
 
   return (
