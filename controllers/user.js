@@ -67,5 +67,6 @@ module.exports = {
       res.status(500).json({ message: "Something went wrong." });
       console.log(err);
     }
+
+    
   },
-};
