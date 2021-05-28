@@ -13,7 +13,7 @@ html, body {
 .overlay {
     background-color: #e7e9ec;
     width: 80%;
-    height: 100vh;
+    height: 200vh;
     margin: 0 auto;
     padding: 8vh;
 }

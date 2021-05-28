@@ -15,8 +15,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
+    },
+    schools: {
+        type: Array,
+        required: false,
     }
-    
   });
 
   // userSchema.pre('save', function (next) {
