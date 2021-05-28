@@ -20,16 +20,19 @@ class Search extends Component {
     colleges: [],
     results: [],
     error: "",
+    page: 0,
+    resultPerPage: 30,
+    pageCount: 0,
   };
 
-  componentDidMount() {
-    API.getAll()
-      .then((res) => {
-        // console.log(res.data);
-        this.setState({ colleges: res.data.results });
-      })
-      .catch((err) => console.log(err));
-  }
+  // componentDidMount() {
+  //   API.getAll()
+  //     .then((res) => {
+  //       console.log(res.data.metadata.total);
+  //       this.setState({ colleges: res.data.results, pageCount: Math.ceil(res.data.metadata.total / this.state.resultPerPage) });
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   // SearchByName -- of college
   handleInputChange = (event) => {
@@ -38,13 +41,20 @@ class Search extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    API.getByName(this.state.search)
+    API.getByName(this.state.search, this.state.page)
       .then((res) => {
+        console.log(res.data);
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
         // console.log(res.data);
-        this.setState({ results: res.data.results, error: "" });
+        this.setState({
+          results: res.data.results,
+          error: "",
+          pageCount: Math.ceil(
+            res.data.metadata.total / this.state.resultPerPage
+          ),
+        });
         console.log(this.state.results);
       })
       .catch((err) => this.setState({ error: err.message }));
@@ -57,13 +67,19 @@ class Search extends Component {
 
   handleFormSubmitForStates = (event) => {
     event.preventDefault();
-    API.getByState(this.state.search)
+    API.getByState(this.state.search, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
         console.log(res.data);
-        this.setState({ results: res.data.results, error: "" });
+        this.setState({
+          results: res.data.results,
+          error: "",
+          pageCount: Math.ceil(
+            res.data.metadata.total / this.state.resultPerPage
+          ),
+        });
       })
       .catch((err) => this.setState({ error: err.message }));
   };
@@ -75,13 +91,19 @@ class Search extends Component {
 
   handleFormSubmitForCity = (event) => {
     event.preventDefault();
-    API.getByCity(this.state.search)
+    API.getByCity(this.state.search, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
         console.log(res.data);
-        this.setState({ results: res.data.results, error: "" });
+        this.setState({
+          results: res.data.results,
+          error: "",
+          pageCount: Math.ceil(
+            res.data.metadata.total / this.state.resultPerPage
+          ),
+        });
       })
       .catch((err) => this.setState({ error: err.message }));
   };
@@ -97,125 +119,143 @@ class Search extends Component {
 
   handleFormSubmitForDist = (event) => {
     event.preventDefault();
-    API.getByDistance(this.state.zipcode, this.state.distance)
+    API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
         console.log(res.data);
-        this.setState({ results: res.data.results, error: "" });
+        this.setState({
+          results: res.data.results,
+          error: "",
+          pageCount: Math.ceil(
+            res.data.metadata.total / this.state.resultPerPage
+          ),
+        });
       })
       .catch((err) => this.setState({ error: err.message }));
+  };
+
+  handlePageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected * this.state.resultPerPage);
+
+    this.setState({ page: this.state.page + 1 }, () => {
+      console.log(this.state.page);
+      this.handleFormSubmit();
+    });
   };
 
   render() {
     return (
       <div className="container">
-      <Accordion defaultActiveKey="0">
-        <Card>
-          <Card.Header>
-            <h2 className="mb-0">
-              <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                Search by College Name
-              </Accordion.Toggle>
-            </h2>
-          </Card.Header>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body>
-              <div>
-                <Container style={{ minHeight: "80%" }}>
-                  <SearchForm
-                    handleFormSubmit={this.handleFormSubmit}
-                    handleInputChange={this.handleInputChange}
-                    colleges={this.state.colleges}
-                  />
-                </Container>
-              </div>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-        <Card>
-          <Card.Header id="headingOne">
-            <h2 className="mb-0">
-              <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                Search College by State
-              </Accordion.Toggle>
-            </h2>
-          </Card.Header>
-          <Accordion.Collapse eventKey="1">
-            <Card.Body>
-              <div>
-                <Container style={{ minHeight: "80%" }}>
-                  <SearchByStates
-                    handleFormSubmitForStates={this.handleFormSubmitForStates}
-                    handleInputChangeForStates={this.handleInputChangeForStates}
-                    states={this.state.states}
-                  />
-                </Container>
-              </div>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-        <Card>
-          <Card.Header id="headingOne">
-            <h2 className="mb-0">
-              <Accordion.Toggle as={Button} variant="link" eventKey="2">
-                Search College by City
-              </Accordion.Toggle>
-            </h2>
-          </Card.Header>
-          <Accordion.Collapse eventKey="2">
-            <Card.Body>
-              <div>
-                <Container style={{ minHeight: "80%" }}>
-                  <SearchByCity
-                    handleFormSubmitForCity={this.handleFormSubmitForCity}
-                    handleInputChangeForCity={this.handleInputChangeForCity}
-                    cities={this.state.cities}
-                  />
-                </Container>
-              </div>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-        <Card>
-          <Card.Header id="headingOne">
-            <h2 className="mb-0">
-              <Accordion.Toggle as={Button} variant="link" eventKey="3">
-                Search College by Distance
-              </Accordion.Toggle>
-            </h2>
-          </Card.Header>
-          <Accordion.Collapse eventKey="3">
-            <Card.Body>
-              <div>
-                <Container style={{ minHeight: "80%" }}>
-                  <SearchByDistance
-                    handleFormSubmitForDist={this.handleFormSubmitForDist}
-                    handleInputChangeForDist={this.handleInputChangeForDist}
-                    handleInputChangeForZip={this.handleInputChangeForZip}
-                    distance={this.state.distance}
-                    zipcode={this.state.zipcode}
-                  />
-                </Container>
-              </div>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-        <CollegeCard colleges={this.state.results} />
-        <ReactPaginate 
-        previousLabel={"<"}
-        nextLabel={">"}
-        breakLabel={"..."}
-        breakClassName={"break-me"}
-        pageCount={30}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        // onPageChange={}cd
-        containerClassName={"pagination"}
-        activeClassName={"active"}
-        />
-      </Accordion>
+        <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              <h2 className="mb-0">
+                <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                  Search by College Name
+                </Accordion.Toggle>
+              </h2>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body>
+                <div>
+                  <Container style={{ minHeight: "80%" }}>
+                    <SearchForm
+                      handleFormSubmit={this.handleFormSubmit}
+                      handleInputChange={this.handleInputChange}
+                      colleges={this.state.colleges}
+                    />
+                  </Container>
+                </div>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Card.Header id="headingOne">
+              <h2 className="mb-0">
+                <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                  Search College by State
+                </Accordion.Toggle>
+              </h2>
+            </Card.Header>
+            <Accordion.Collapse eventKey="1">
+              <Card.Body>
+                <div>
+                  <Container style={{ minHeight: "80%" }}>
+                    <SearchByStates
+                      handleFormSubmitForStates={this.handleFormSubmitForStates}
+                      handleInputChangeForStates={
+                        this.handleInputChangeForStates
+                      }
+                      states={this.state.states}
+                    />
+                  </Container>
+                </div>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Card.Header id="headingOne">
+              <h2 className="mb-0">
+                <Accordion.Toggle as={Button} variant="link" eventKey="2">
+                  Search College by City
+                </Accordion.Toggle>
+              </h2>
+            </Card.Header>
+            <Accordion.Collapse eventKey="2">
+              <Card.Body>
+                <div>
+                  <Container style={{ minHeight: "80%" }}>
+                    <SearchByCity
+                      handleFormSubmitForCity={this.handleFormSubmitForCity}
+                      handleInputChangeForCity={this.handleInputChangeForCity}
+                      cities={this.state.cities}
+                    />
+                  </Container>
+                </div>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card>
+            <Card.Header id="headingOne">
+              <h2 className="mb-0">
+                <Accordion.Toggle as={Button} variant="link" eventKey="3">
+                  Search College by Distance
+                </Accordion.Toggle>
+              </h2>
+            </Card.Header>
+            <Accordion.Collapse eventKey="3">
+              <Card.Body>
+                <div>
+                  <Container style={{ minHeight: "80%" }}>
+                    <SearchByDistance
+                      handleFormSubmitForDist={this.handleFormSubmitForDist}
+                      handleInputChangeForDist={this.handleInputChangeForDist}
+                      handleInputChangeForZip={this.handleInputChangeForZip}
+                      distance={this.state.distance}
+                      zipcode={this.state.zipcode}
+                    />
+                  </Container>
+                </div>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <CollegeCard colleges={this.state.results} />
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageChange}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+          />
+        </Accordion>
       </div>
     );
   }
