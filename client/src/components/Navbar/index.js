@@ -70,7 +70,7 @@ function Navbar() {
           {!user?.result ? (
           <li className="nav-item">
             <Link
-              to="/signup"
+              to="/login"
               className={
                 window.location.pathname === "/signup"
                   ? "nav-link active"

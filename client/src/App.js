@@ -22,8 +22,8 @@ function App() {
           <Route exact path="/home" component={Homepage} />
           <Route exact path="/search" component={Search} />
           <Route exact path='/profile' component={User} />
+          <Route path='/login' component={Signup} />
           <Route path="/:id"><OneSchool /></Route>
-          <Route exact path='/login' component={Signup} />
           {/* <Route exact path="/login" component={Login} /> */}
           </Switch>
         </Wrapper>
