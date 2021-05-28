@@ -12,13 +12,15 @@ class User extends Component {
     this.state = { mode: "act" };
   }
 
-  handleChangeSat = (event) => {
+  handleChangeSat = () => {
+    console.log('SAT Mode');
     this.setState({
       mode: "sat",
     });
   };
 
-  handleChangeAct = (event) => {
+  handleChangeAct = () => {
+    console.log('ACT Mode');
     this.setState({
       mode: "act",
     });
@@ -34,7 +36,7 @@ class User extends Component {
   };
 
   render = () => {
-    if (this.state.mode === "act") {
+    if (this.state.mode == "act") {
       return (
         <div className="backdrop">
           <div className="overlay">
@@ -48,14 +50,14 @@ class User extends Component {
                   <option
                     value="ACT"
                     type="submit"
-                    onClick={this.handleChangeAct}
+                    onChange={this.handleChangeAct}
                   >
                     ACT
                   </option>
                   <option
                     value="SAT"
                     type="submit"
-                    onClick={this.handleChangeSat}
+                    onChange={this.handleChangeSat}
                   >
                     SAT
                   </option>
@@ -126,7 +128,7 @@ class User extends Component {
           />
         </div>
       );
-    } else if (this.state.mode === "sat") {
+    } else if (this.state.mode == "sat") {
       return (
         <div className="backdrop">
           <div className="overlay">
@@ -166,13 +168,13 @@ class User extends Component {
                       />
                     </label>
                     <label>
-                      English:
+                      Reading:
                       <input
                         className="form-control"
                         type="text"
                         placeholder=""
-                        name="satEnglish"
-                        value={this.state.satEnglish}
+                        name="satReading"
+                        value={this.state.satReading}
                         onChange={this.handler}
                       />
                     </label>
