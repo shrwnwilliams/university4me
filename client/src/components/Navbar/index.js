@@ -2,26 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import * as actionType from '../../constants/actionTypes';
+import * as actionType from "../../constants/actionTypes";
 import "./style.css";
 
 function Navbar() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const history = useHistory();
 
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
 
-    history.push('/auth');
+    history.push("/auth");
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      setUser(JSON.parse(localStorage.getItem('profile')));
-    })
-  }, [], 60000);
-
+  useEffect(
+    () => {
+      setInterval(() => {
+        setUser(JSON.parse(localStorage.getItem("profile")));
+      });
+    },
+    [],
+    60000
+  );
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,18 +48,6 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <Link
-              to="/profile"
-              className={
-                window.location.pathname === "/profile"
-                  ? "nav-link active"
-                  : "nav-link"
-              }
-            >
-              User Profile
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
               to="/search"
               className={
                 window.location.pathname === "/search"
@@ -68,32 +59,46 @@ function Navbar() {
             </Link>
           </li>
           {!user?.result ? (
-          <li className="nav-item">
-            <Link
-              to="/signup"
-              className={
-                window.location.pathname === "/signup"
-                  ? "nav-link active"
-                  : "nav-link"
-              }
-            >
-              Login | Signup
-            </Link>
-          </li>
+            <li className="nav-item">
+              <Link
+                to="/signup"
+                className={
+                  window.location.pathname === "/signup"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                Login | Signup
+              </Link>
+            </li>
           ) : (
-          <li className="nav-item">
-            <Link
-              to="/logout"
-              className={
-                window.location.pathname === "/logout"
-                  ? "nav-link active"
-                  : "nav-link"
-              }
-              onClick={logout}
-            >
-              Logout
-            </Link>
-          </li>
+            <>
+              <li className="nav-item">
+                <Link
+                  to="/profile"
+                  className={
+                    window.location.pathname === "/profile"
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                >
+                  Profile
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className={
+                    window.location.pathname === "/"
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
+                  onClick={logout}
+                >
+                  Logout
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </div>
