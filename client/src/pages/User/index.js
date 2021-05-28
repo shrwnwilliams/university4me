@@ -24,7 +24,7 @@ const User = () => {
         <div className="userinfo">
           <div className="col-sm-6">
             <h3>Username: {User.username}</h3>
-            <h4>User-Id: {User.userid}</h4>
+            <h4>User-Id: {User._id}</h4>
           </div>
           <div className="col-sm-6">
             <select name="selectList" id="selectList">
@@ -104,7 +104,7 @@ const User = () => {
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       />
     </div>
   );
