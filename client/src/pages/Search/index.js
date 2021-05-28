@@ -9,6 +9,7 @@ import SearchByDistance from "../../components/SearchByDistance";
 import { Accordion, Button, Card } from "react-bootstrap";
 import CollegeCard from "../../components/CollegeCard";
 import ReactPaginate from "react-paginate";
+import e from "cors";
 
 class Search extends Component {
   state = {
@@ -20,9 +21,10 @@ class Search extends Component {
     colleges: [],
     results: [],
     error: "",
-    page: 0,
+    page: 1,
     resultPerPage: 30,
     pageCount: 0,
+    lastSearch: ""
   };
 
   // componentDidMount() {
@@ -39,9 +41,9 @@ class Search extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
-    API.getByName(this.state.search, this.state.page)
+  // switch case to get all of the info
+getByName () {
+  API.getByName(this.state.search, this.state.page)
       .then((res) => {
         console.log(res.data);
         if (res.data.status === "error") {
@@ -58,6 +60,11 @@ class Search extends Component {
         console.log(this.state.results);
       })
       .catch((err) => this.setState({ error: err.message }));
+}
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    this.getByName();
   };
 
   // SearchByStates
@@ -140,9 +147,9 @@ class Search extends Component {
     let selected = data.selected;
     let offset = Math.ceil(selected * this.state.resultPerPage);
 
-    this.setState({ page: this.state.page + 1 }, () => {
+    this.setState({ page: offset }, () => {
       console.log(this.state.page);
-      this.handleFormSubmit();
+      this.getByName();
     });
   };
 
