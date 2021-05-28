@@ -19,6 +19,14 @@ const userSchema = new Schema({
     schools: {
         type: Array,
         required: false,
+    },
+    act: {
+        type: Array,
+        required: false,
+    },
+    sat: {
+        type: Array,
+        required: false,
     }
   });
   
