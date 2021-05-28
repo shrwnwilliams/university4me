@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -6,6 +6,7 @@ import * as actionType from '../../constants/actionTypes';
 import "./style.css";
 
 function Navbar() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -14,6 +15,13 @@ function Navbar() {
 
     history.push('/auth');
   };
+
+  useEffect(() => {
+    setInterval(() => {
+      setUser(user);
+    })
+  }, [user], 1000);
+
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -59,6 +67,7 @@ function Navbar() {
               Search
             </Link>
           </li>
+          {!user?.result ? (
           <li className="nav-item">
             <Link
               to="/signup"
@@ -71,6 +80,7 @@ function Navbar() {
               Login | Signup
             </Link>
           </li>
+          ) : (
           <li className="nav-item">
             <Link
               to="/logout"
@@ -84,6 +94,7 @@ function Navbar() {
               Logout
             </Link>
           </li>
+          )}
         </ul>
       </div>
     </nav>
