@@ -20,7 +20,7 @@ function Navbar() {
     setInterval(() => {
       setUser(JSON.parse(localStorage.getItem('profile')));
     })
-  }, [], 5000);
+  }, [], 60000);
 
 
   return (
