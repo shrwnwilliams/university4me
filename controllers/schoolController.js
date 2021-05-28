@@ -112,6 +112,7 @@ module.exports = {
   findByDistance: function (req, res) {
     const zip = req.params.zip;
     const dis = req.params.dis;
+    const page = req.params.page;
     fetch(
       "https://api.data.gov/ed/collegescorecard/v1/schools.json?zip=" +
         zip +
