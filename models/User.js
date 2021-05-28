@@ -15,8 +15,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
+    },
+    schools: {
+        type: Array,
+        required: false,
     }
-    
   });
   
   const User = mongoose.model("User", userSchema);
