@@ -30,9 +30,10 @@ function OneSchool() {
   useEffect(() => {
     setSchoolState({ ...schoolState, id: id });
     console.log(schoolState);
+    console.log(id)
     API.getById(id)
       .then(function (res) {
-        console.log(res.data.results[0]);
+        console.log(res);
         setSchoolState({
           name: res.data.results[0]["school.name"],
           city: res.data.results[0]["school.city"],

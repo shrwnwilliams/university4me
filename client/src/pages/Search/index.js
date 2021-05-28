@@ -8,6 +8,7 @@ import SearchByDistance from "../../components/SearchByDistance";
 // import SearchResults from "../components/SearchResults";
 import { Accordion, Button, Card } from "react-bootstrap";
 import CollegeCard from "../../components/CollegeCard";
+import ReactPaginate from "react-paginate";
 
 class Search extends Component {
   state = {
@@ -202,6 +203,18 @@ class Search extends Component {
           </Accordion.Collapse>
         </Card>
         <CollegeCard colleges={this.state.results} />
+        <ReactPaginate 
+        previousLabel={"<"}
+        nextLabel={">"}
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={30}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        // onPageChange={}cd
+        containerClassName={"pagination"}
+        activeClassName={"active"}
+        />
       </Accordion>
       </div>
     );

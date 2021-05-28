@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/Wrapper";
 import Footer from "./components/Footer";
@@ -17,12 +17,15 @@ function App() {
       <div>
         <Navbar />
         <Wrapper>
+          <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/home" component={Homepage} />
           <Route exact path="/search" component={Search} />
           <Route exact path='/profile' component={User} />
-          <Route exact path='/signup' component={Signup} />
-          <Route exact path="/:id" component={OneSchool} />
+          <Route path="/:id"><OneSchool /></Route>
+          <Route exact path='/login' component={Signup} />
+          {/* <Route exact path="/login" component={Login} /> */}
+          </Switch>
         </Wrapper>
         <Footer />
       </div>
