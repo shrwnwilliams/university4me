@@ -6,14 +6,14 @@ function CollegeCardBody(props) {
   return (
     <div className="card my-3">
       <div className="card-body">
-        <h5 className="card-title"><a href={`/${props.id}`}>{props["school.name"]}</a></h5>
+        <h5 className="card-title"><a href={`/${props.id}`} target="_blank" rel="noreferrer">{props["school.name"]}</a></h5>
         <p className="card-text">
           {props["school.city"]}, {props["school.state"]}{" "}
           {props["school.zip"].split("-")[0]}
         </p>
         <a
           href={`${props["school.school_url"]}`}
-          rel="noreferer"
+          rel="noreferrer"
           target="_blank"
           className="btn btn-primary"
         >
