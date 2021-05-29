@@ -30,7 +30,7 @@ function OneSchool() {
   useEffect(() => {
     setSchoolState({ ...schoolState, id: id });
     console.log(schoolState);
-    console.log(id)
+    console.log(id);
     API.getById(id)
       .then(function (res) {
         console.log(res);
@@ -77,16 +77,18 @@ function OneSchool() {
       });
   }, []);
 
-  function percentage(num){
-    return num*100
+  function percentage(num) {
+    return num * 100;
   }
 
-  console.log(percentage(.4586))
+  console.log(percentage(0.4586));
 
   return (
     <div className="container">
       <div className="card mt-5">
-        <div className="card-header"><h2>{schoolState.name}</h2></div>
+        <div className="card-header">
+          <h2>{schoolState.name}</h2>
+        </div>
         <div className="card-body">
           <h5 className="card-title">Located in</h5>
           <p className="card-text">
@@ -100,26 +102,34 @@ function OneSchool() {
           <p>{schoolState.admissionOverall}</p>
 
           <h3>SAT Scores</h3>
-          <p>Critical Reading: <span>{schoolState.satReading}</span></p>
-          <p>Math: <span>{schoolState.satMath}</span></p>
-          <p>Writing: <span>{schoolState.satWriting}</span></p>
+          <p>
+            Critical Reading: <span>{schoolState.satReading}</span>
+          </p>
+          <p>
+            Math: <span>{schoolState.satMath}</span>
+          </p>
+          <p>
+            Writing: <span>{schoolState.satWriting}</span>
+          </p>
 
           <h3>ACT Scores</h3>
-          <p>English: <span>{schoolState.actEnglish}</span></p>
-          <p>Math: <span>{schoolState.actMath}</span></p>
-          <p>Writing: <span>{schoolState.actWriting}</span></p>
-          <p>Cumulative: <span>{schoolState.actCumulative}</span></p>
+          <p>
+            English: <span>{schoolState.actEnglish}</span>
+          </p>
+          <p>
+            Math: <span>{schoolState.actMath}</span>
+          </p>
+          <p>
+            Writing: <span>{schoolState.actWriting}</span>
+          </p>
+          <p>
+            Cumulative: <span>{schoolState.actCumulative}</span>
+          </p>
 
           <h3>Cost</h3>
-          <p>
-            In State: <span>${schoolState.costInState}</span>
-          </p>
-          <p>
-            Out of State: <span>${schoolState.costOutState}</span>
-          </p>
-          <p>
-            Program Year: <span>${schoolState.costProgram}</span>
-          </p>
+            {schoolState.costInState === null ? <></> : <p>In State: <span>${schoolState.costInState}</span></p>}
+            {schoolState.costOutState === null ? <></> : <p>Out of State: <span>${schoolState.costOutState}</span></p>}
+            {schoolState.costProgram === null ? <></> : <p>Program Year: <span>${schoolState.costProgram}</span></p>}
           <a
             href={schoolState.url}
             target="_blank"

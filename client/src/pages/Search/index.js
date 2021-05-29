@@ -21,10 +21,10 @@ class Search extends Component {
     colleges: [],
     results: [],
     error: "",
-    page: 1,
+    page: 0,
     resultPerPage: 30,
     pageCount: 0,
-    lastSearch: ""
+    lastSearch: "",
   };
 
   // componentDidMount() {
@@ -42,8 +42,8 @@ class Search extends Component {
   };
 
   // switch case to get all of the info
-getByName () {
-  API.getByName(this.state.search, this.state.page)
+  getByName() {
+    API.getByName(this.state.search, this.state.page)
       .then((res) => {
         console.log(res.data);
         if (res.data.status === "error") {
@@ -60,7 +60,7 @@ getByName () {
         console.log(this.state.results);
       })
       .catch((err) => this.setState({ error: err.message }));
-}
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -145,7 +145,7 @@ getByName () {
 
   handlePageChange = (data) => {
     let selected = data.selected;
-    let offset = Math.ceil(selected * this.state.resultPerPage);
+    let offset = Math.ceil(selected - 1);
 
     this.setState({ page: offset }, () => {
       console.log(this.state.page);
