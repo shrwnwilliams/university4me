@@ -103,8 +103,8 @@ class Search extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleFormSubmitForCity = (event) => {
-    event.preventDefault();
+  getByCity() {
+    this.setState({ ...this.state, lastSearch: "city" });
     API.getByCity(this.state.search, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
@@ -120,6 +120,11 @@ class Search extends Component {
         });
       })
       .catch((err) => this.setState({ error: err.message }));
+  }
+
+  handleFormSubmitForCity = (event) => {
+    event.preventDefault();
+    this.getByCity();
   };
 
   // SearchByDistance and Zipcode
@@ -174,6 +179,18 @@ class Search extends Component {
       console.log(this.state.page);
       // window.scrollTo(0,0);
       this.getByState();
+      // this.scrollToTop();
+    });
+  };
+
+  handleCityPageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      // window.scrollTo(0,0);
+      this.getByCity();
       // this.scrollToTop();
     });
   };
@@ -301,6 +318,22 @@ class Search extends Component {
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
               onPageChange={this.handleStatePageChange}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+            />
+          ) : (
+            <></>
+          )}
+          {this.state.lastSearch === "city" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleCityPageChange}
               containerClassName={"pagination"}
               activeClassName={"active"}
             />

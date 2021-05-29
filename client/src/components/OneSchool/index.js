@@ -103,7 +103,7 @@ function OneSchool() {
           ) : (
             <div>
               <h3>Admission Rate</h3>{" "}
-              <p>{`${percentage(schoolState.admissionOverall)}%`}</p>
+              <p>{`${Math.floor(percentage(schoolState.admissionOverall))}%`}</p>
             </div>
           )}
 
