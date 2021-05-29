@@ -21,3 +21,4 @@ export default {
     return axios.get("api/school/dis/" + zip + "/" + dis + "/" + page);
   },
 };
+

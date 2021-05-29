@@ -6,6 +6,7 @@ const User = require("../models/User.js");
 const secret = "test";
 
 module.exports = {
+  // Logs in User
   signin: async function (req, res) {
     const { username, password } = req.body;
     console.group(username, password);
@@ -36,6 +37,7 @@ module.exports = {
     }
   },
 
+  // Creates User
   signup: async function (req, res) {
     const { username, password } = req.body;
     console.group(username, password);
@@ -62,10 +64,40 @@ module.exports = {
       );
 
       res.status(200).json({ result, token });
-      
     } catch (err) {
       res.status(500).json({ message: "Something went wrong." });
       console.log(err);
     }
   },
+  // ACT User input
+  actUpdate: function (req, res) {
+    User.findByIdAndUpdate(
+      req.params.id,
+      { $push: { act: req.body } },
+      { new: true, runValidators: true }
+    )
+      .then((dbAct) => res.json(dbAct))
+      .catch((err) => res.status(422).json(err));
+  },
+  // SAT User input
+  satUpdate: function (req, res) {
+    User.findByIdAndUpdate(
+      req.params.id,
+      { $push: { sat: req.body } },
+      { new: true, runValidators: true }
+    )
+      .then((dbSat) => res.json(dbSat))
+      .catch((err) => res.status(422).json(err));
+  },
+// Saved Schools
+schoolsUpdate: function (req, res) {
+  User.findByIdAndUpdate(
+    req.params.id,
+    { $push: { schools: req.body } },
+    { new: true, runValidators: true }
+  )
+    .then((dbSchools) => res.json(dbSchools))
+    .catch((err) => res.status(422).json(err));
+},
 };
+
