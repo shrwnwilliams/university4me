@@ -6,6 +6,7 @@ const User = require("../models/User.js");
 const secret = "test";
 
 module.exports = {
+  // Logs in User
   signin: async function (req, res) {
     const { username, password } = req.body;
     console.group(username, password);
@@ -36,6 +37,7 @@ module.exports = {
     }
   },
 
+  // Creates User
   signup: async function (req, res) {
     const { username, password } = req.body;
     console.group(username, password);
@@ -62,10 +64,26 @@ module.exports = {
       );
 
       res.status(200).json({ result, token });
-      
     } catch (err) {
       res.status(500).json({ message: "Something went wrong." });
       console.log(err);
     }
   },
+  // Find User id
+  // act: function(req, res) {
+  //   User.findById(req.params._id)
+  //     .then(dbUser => res.json(dbUser))
+  //     .catch(err => res.status(422).json(err));
+  // },
+  actUpdate: function (req, res) {
+    User.findByIdAndUpdate(
+      req.params.id,
+      { $push: { act: req.body } },
+      { new: true, runValidators: true }
+    )
+      .then((dbUser) => res.json("hello"))
+      .catch((err) => res.status(422).json(err));
+  },
 };
+
+// , {$push: {act: req.body}}, {new: true, runValidators: true}
