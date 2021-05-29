@@ -143,13 +143,19 @@ class Search extends Component {
       .catch((err) => this.setState({ error: err.message }));
   };
 
+  // scrollToTop = function(){
+  //   window.scrollTo(0,0)
+  // }
+
   handlePageChange = (data) => {
     let selected = data.selected;
-    let offset = Math.ceil(selected - 1);
+    let offset = Math.ceil(selected);
 
     this.setState({ page: offset }, () => {
       console.log(this.state.page);
+      // window.scrollTo(0,0);
       this.getByName();
+      // this.scrollToTop();
     });
   };
 

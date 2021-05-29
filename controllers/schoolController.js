@@ -42,7 +42,7 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
       })
       .catch((err) => {
@@ -63,7 +63,7 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
       })
       .catch((err) => {
@@ -84,7 +84,8 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
+        console.log(page)
         res.json(data);
       })
       .catch((err) => {
@@ -102,7 +103,7 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
       })
       .catch((err) => {
@@ -126,7 +127,7 @@ module.exports = {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         res.json(data);
       })
       .catch((err) => {
