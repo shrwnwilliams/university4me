@@ -136,28 +136,30 @@ class Search extends Component {
     this.setState({ zipcode: event.target.value });
   };
 
+  getByDistance(){
+    this.setState({ ...this.state, lastSearch: "distance" });    
+    API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
+    .then((res) => {
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
+      console.log(res.data);
+      this.setState({
+        results: res.data.results,
+        error: "",
+        pageCount: Math.ceil(
+          res.data.metadata.total / this.state.resultPerPage
+        ),
+      });
+    })
+    .catch((err) => this.setState({ error: err.message }));
+  }
+
   handleFormSubmitForDist = (event) => {
     event.preventDefault();
-    API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
-      .then((res) => {
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        console.log(res.data);
-        this.setState({
-          results: res.data.results,
-          error: "",
-          pageCount: Math.ceil(
-            res.data.metadata.total / this.state.resultPerPage
-          ),
-        });
-      })
-      .catch((err) => this.setState({ error: err.message }));
+    this.getByDistance();
   };
 
-  // scrollToTop = function(){
-  //   window.scrollTo(0,0)
-  // }
 
   handleNamePageChange = (data) => {
     let selected = data.selected;
@@ -191,6 +193,18 @@ class Search extends Component {
       console.log(this.state.page);
       // window.scrollTo(0,0);
       this.getByCity();
+      // this.scrollToTop();
+    });
+  };
+
+  handleDistPageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      // window.scrollTo(0,0);
+      this.getByDistance();
       // this.scrollToTop();
     });
   };
@@ -303,7 +317,7 @@ class Search extends Component {
               pageRangeDisplayed={5}
               onPageChange={this.handleNamePageChange}
               containerClassName={"pagination"}
-              activeClassName={"active"}
+              activeClassName={"pageActive"}
             />
           ) : (
             <></>
@@ -319,7 +333,7 @@ class Search extends Component {
               pageRangeDisplayed={5}
               onPageChange={this.handleStatePageChange}
               containerClassName={"pagination"}
-              activeClassName={"active"}
+              activeClassName={"pageActive"}
             />
           ) : (
             <></>
@@ -335,7 +349,23 @@ class Search extends Component {
               pageRangeDisplayed={5}
               onPageChange={this.handleCityPageChange}
               containerClassName={"pagination"}
-              activeClassName={"active"}
+              activeClassName={"pageActive"}
+            />
+          ) : (
+            <></>
+          )}
+          {this.state.lastSearch === "distance" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleDistPageChange}
+              containerClassName={"pagination"}
+              activeClassName={"pageActive"}
             />
           ) : (
             <></>
