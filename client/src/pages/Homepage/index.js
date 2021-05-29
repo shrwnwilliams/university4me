@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
-import style from "./style.css";
+import "./style.css";
 import background from "../../img/image1.jpg";
 
 const Homepage = () => {
@@ -19,7 +19,7 @@ const Homepage = () => {
         <div className="col-sm-5 ml-5">
           <div className="d-flex flex-column bd-highlight col-sm-12">
             <div className="tags text-center">
-              <a>Search for Schools!</a>
+              <a href="/search">Search for Schools!</a>
             </div>
             <div className="tags text-center">
               <a>View Your Favorites</a>
