@@ -98,9 +98,14 @@ function OneSchool() {
           <h3>Student Size</h3>
           <p>{schoolState.studentSize}</p>
 
-          <h3>Admission Rate</h3>
-          <p>{schoolState.admissionOverall}</p>
-
+          {schoolState.admissionOverall === null ? (
+            <></>
+          ) : (
+            <div>
+              <h3>Admission Rate</h3> <p>{schoolState.admissionOverall}</p>
+            </div>
+          )}
+          
           <h3>SAT Scores</h3>
           <p>
             Critical Reading: <span>{schoolState.satReading}</span>
@@ -127,9 +132,27 @@ function OneSchool() {
           </p>
 
           <h3>Cost</h3>
-            {schoolState.costInState === null ? <></> : <p>In State: <span>${schoolState.costInState}</span></p>}
-            {schoolState.costOutState === null ? <></> : <p>Out of State: <span>${schoolState.costOutState}</span></p>}
-            {schoolState.costProgram === null ? <></> : <p>Program Year: <span>${schoolState.costProgram}</span></p>}
+          {schoolState.costInState === null ? (
+            <></>
+          ) : (
+            <p>
+              In State: <span>${schoolState.costInState}</span>
+            </p>
+          )}
+          {schoolState.costOutState === null ? (
+            <></>
+          ) : (
+            <p>
+              Out of State: <span>${schoolState.costOutState}</span>
+            </p>
+          )}
+          {schoolState.costProgram === null ? (
+            <></>
+          ) : (
+            <p>
+              Program Year: <span>${schoolState.costProgram}</span>
+            </p>
+          )}
           <a
             href={schoolState.url}
             target="_blank"
