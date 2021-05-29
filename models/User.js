@@ -17,9 +17,6 @@ const userSchema = new Schema({
         required: true,
     },
     schools: [{
-        type: {
-            type: String,
-        },
         name: {
             type: String,
             required: true
