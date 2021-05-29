@@ -10,6 +10,7 @@ import { Accordion, Button, Card } from "react-bootstrap";
 import CollegeCard from "../../components/CollegeCard";
 import ReactPaginate from "react-paginate";
 import e from "cors";
+import "./style.css";
 
 class Search extends Component {
   state = {
@@ -43,6 +44,7 @@ class Search extends Component {
 
   // switch case to get all of the info
   getByName() {
+    this.setState({ ...this.state, lastSearch: "name" });
     API.getByName(this.state.search, this.state.page)
       .then((res) => {
         console.log(res.data);
@@ -72,8 +74,8 @@ class Search extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleFormSubmitForStates = (event) => {
-    event.preventDefault();
+  getByState() {
+    this.setState({ ...this.state, lastSearch: "state" });
     API.getByState(this.state.search, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
@@ -89,6 +91,11 @@ class Search extends Component {
         });
       })
       .catch((err) => this.setState({ error: err.message }));
+  }
+
+  handleFormSubmitForStates = (event) => {
+    event.preventDefault();
+    this.getByState();
   };
 
   // SearchByCity
@@ -147,7 +154,7 @@ class Search extends Component {
   //   window.scrollTo(0,0)
   // }
 
-  handlePageChange = (data) => {
+  handleNamePageChange = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected);
 
@@ -155,6 +162,18 @@ class Search extends Component {
       console.log(this.state.page);
       // window.scrollTo(0,0);
       this.getByName();
+      // this.scrollToTop();
+    });
+  };
+
+  handleStatePageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      // window.scrollTo(0,0);
+      this.getByState();
       // this.scrollToTop();
     });
   };
@@ -256,18 +275,38 @@ class Search extends Component {
             </Accordion.Collapse>
           </Card>
           <CollegeCard colleges={this.state.results} />
-          <ReactPaginate
-            previousLabel={"<"}
-            nextLabel={">"}
-            breakLabel={"..."}
-            breakClassName={"break-me"}
-            pageCount={this.state.pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={this.handlePageChange}
-            containerClassName={"pagination"}
-            activeClassName={"active"}
-          />
+          {this.state.lastSearch === "name" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleNamePageChange}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+            />
+          ) : (
+            <></>
+          )}
+          {this.state.lastSearch === "state" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleStatePageChange}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+            />
+          ) : (
+            <></>
+          )}
         </Accordion>
       </div>
     );

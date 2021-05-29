@@ -1,0 +1,7 @@
+.pagination > li{
+    margin-right: 1em;
+}
+
+.active {
+    font-weight: 100;
+}

@@ -107,31 +107,47 @@ function OneSchool() {
             </div>
           )}
 
-          <h3>SAT Scores</h3>
-          <p>
-            Critical Reading: <span>{schoolState.satReading}</span>
-          </p>
-          <p>
-            Math: <span>{schoolState.satMath}</span>
-          </p>
-          <p>
-            Writing: <span>{schoolState.satWriting}</span>
-          </p>
+          {!schoolState.satReading &&
+          !schoolState.satWriting &&
+          !schoolState.satMath ? (
+            <></>
+          ) : (
+            <>
+              <h3>SAT Scores</h3>
+              <p>
+                Critical Reading: <span>{schoolState.satReading}</span>
+              </p>
+              <p>
+                Math: <span>{schoolState.satMath}</span>
+              </p>
+              <p>
+                Writing: <span>{schoolState.satWriting}</span>
+              </p>
+            </>
+          )}
 
-          <h3>ACT Scores</h3>
-          <p>
-            English: <span>{schoolState.actEnglish}</span>
-          </p>
-          <p>
-            Math: <span>{schoolState.actMath}</span>
-          </p>
-          <p>
-            Writing: <span>{schoolState.actWriting}</span>
-          </p>
-          <p>
-            Cumulative: <span>{schoolState.actCumulative}</span>
-          </p>
-
+          {!schoolState.actEnglish &&
+          !schoolState.actMath &&
+          !schoolState.actWriting &&
+          !schoolState.actCumulative ? (
+            <></>
+          ) : (
+            <>
+              <h3>ACT Scores</h3>
+              <p>
+                English: <span>{schoolState.actEnglish}</span>
+              </p>
+              <p>
+                Math: <span>{schoolState.actMath}</span>
+              </p>
+              <p>
+                Writing: <span>{schoolState.actWriting}</span>
+              </p>
+              <p>
+                Cumulative: <span>{schoolState.actCumulative}</span>
+              </p>
+            </>
+          )}
           <h3>Cost</h3>
           {schoolState.costInState === null ? (
             <></>
