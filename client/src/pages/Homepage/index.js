@@ -33,18 +33,13 @@ const Homepage = () => {
           </div>
         </div>
         <div className="para col-sm-6 ml-4">
-          <h3>Lorem Ipsum Dolor Sit</h3>
+          <h3>Planning for college doesn't have to be stressful.</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque iaculis augue a eros rhoncus mattis. Nam mi ante,
-            imperdiet et sapien non, facilisis lobortis quam. Sed tempor ante
-            eget finibus eleifend. Cras vel leo sit amet libero lobortis
-            vulputate. Nunc ut libero aliquet, porta ante non, pretium mauris.
-            Nullam id orci vehicula, posuere risus sed, laoreet ante. Curabitur
-            eu sem a metus euismod auctor nec a velit. Nunc dignissim ornare
-            orci et feugiat. Morbi et eleifend lectus. Nulla in metus iaculis,
-            vestibulum nisl eget, fringilla ipsum. Integer eu nulla vitae tortor
-            mollis dapibus et ut leo.
+          Your mind is probably reeling from all of the college options. Beginning your 
+          college search can be daunting so to make it easier we help guide you on searching 
+          for colleges based of your criteria. At [educateMahSelf] you can search through 
+          colleges with ease. Customize your search and create a personalized profile with your 
+          ACT and SAT scores to compare colleges that are right for you. 
           </p>
         </div>
       </div>
