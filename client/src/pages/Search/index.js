@@ -10,6 +10,7 @@ import { Accordion, Button, Card } from "react-bootstrap";
 import CollegeCard from "../../components/CollegeCard";
 import ReactPaginate from "react-paginate";
 import e from "cors";
+import "./style.css";
 
 class Search extends Component {
   state = {
@@ -43,6 +44,7 @@ class Search extends Component {
 
   // switch case to get all of the info
   getByName() {
+    this.setState({ ...this.state, lastSearch: "name" });
     API.getByName(this.state.search, this.state.page)
       .then((res) => {
         console.log(res.data);
@@ -72,8 +74,8 @@ class Search extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleFormSubmitForStates = (event) => {
-    event.preventDefault();
+  getByState() {
+    this.setState({ ...this.state, lastSearch: "state" });
     API.getByState(this.state.search, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
@@ -89,6 +91,11 @@ class Search extends Component {
         });
       })
       .catch((err) => this.setState({ error: err.message }));
+  }
+
+  handleFormSubmitForStates = (event) => {
+    event.preventDefault();
+    this.getByState();
   };
 
   // SearchByCity
@@ -96,8 +103,8 @@ class Search extends Component {
     this.setState({ search: event.target.value });
   };
 
-  handleFormSubmitForCity = (event) => {
-    event.preventDefault();
+  getByCity() {
+    this.setState({ ...this.state, lastSearch: "city" });
     API.getByCity(this.state.search, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
@@ -113,6 +120,11 @@ class Search extends Component {
         });
       })
       .catch((err) => this.setState({ error: err.message }));
+  }
+
+  handleFormSubmitForCity = (event) => {
+    event.preventDefault();
+    this.getByCity();
   };
 
   // SearchByDistance and Zipcode
@@ -124,30 +136,32 @@ class Search extends Component {
     this.setState({ zipcode: event.target.value });
   };
 
+  getByDistance(){
+    this.setState({ ...this.state, lastSearch: "distance" });    
+    API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
+    .then((res) => {
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
+      console.log(res.data);
+      this.setState({
+        results: res.data.results,
+        error: "",
+        pageCount: Math.ceil(
+          res.data.metadata.total / this.state.resultPerPage
+        ),
+      });
+    })
+    .catch((err) => this.setState({ error: err.message }));
+  }
+
   handleFormSubmitForDist = (event) => {
     event.preventDefault();
-    API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
-      .then((res) => {
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        console.log(res.data);
-        this.setState({
-          results: res.data.results,
-          error: "",
-          pageCount: Math.ceil(
-            res.data.metadata.total / this.state.resultPerPage
-          ),
-        });
-      })
-      .catch((err) => this.setState({ error: err.message }));
+    this.getByDistance();
   };
 
-  // scrollToTop = function(){
-  //   window.scrollTo(0,0)
-  // }
 
-  handlePageChange = (data) => {
+  handleNamePageChange = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected);
 
@@ -155,6 +169,42 @@ class Search extends Component {
       console.log(this.state.page);
       // window.scrollTo(0,0);
       this.getByName();
+      // this.scrollToTop();
+    });
+  };
+
+  handleStatePageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      // window.scrollTo(0,0);
+      this.getByState();
+      // this.scrollToTop();
+    });
+  };
+
+  handleCityPageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      // window.scrollTo(0,0);
+      this.getByCity();
+      // this.scrollToTop();
+    });
+  };
+
+  handleDistPageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      // window.scrollTo(0,0);
+      this.getByDistance();
       // this.scrollToTop();
     });
   };
@@ -256,18 +306,70 @@ class Search extends Component {
             </Accordion.Collapse>
           </Card>
           <CollegeCard colleges={this.state.results} />
-          <ReactPaginate
-            previousLabel={"<"}
-            nextLabel={">"}
-            breakLabel={"..."}
-            breakClassName={"break-me"}
-            pageCount={this.state.pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={this.handlePageChange}
-            containerClassName={"pagination"}
-            activeClassName={"active"}
-          />
+          {this.state.lastSearch === "name" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleNamePageChange}
+              containerClassName={"pagination"}
+              activeClassName={"pageActive"}
+            />
+          ) : (
+            <></>
+          )}
+          {this.state.lastSearch === "state" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleStatePageChange}
+              containerClassName={"pagination"}
+              activeClassName={"pageActive"}
+            />
+          ) : (
+            <></>
+          )}
+          {this.state.lastSearch === "city" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleCityPageChange}
+              containerClassName={"pagination"}
+              activeClassName={"pageActive"}
+            />
+          ) : (
+            <></>
+          )}
+          {this.state.lastSearch === "distance" ? (
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleDistPageChange}
+              containerClassName={"pagination"}
+              activeClassName={"pageActive"}
+            />
+          ) : (
+            <></>
+          )}
         </Accordion>
       </div>
     );

@@ -11,14 +11,25 @@ function CollegeCardBody(props) {
           {props["school.city"]}, {props["school.state"]}{" "}
           {props["school.zip"].split("-")[0]}
         </p>
-        <a
-          href={`${props["school.school_url"]}`}
-          rel="noreferrer"
-          target="_blank"
-          className="btn btn-primary"
-        >
-          Check out their website!
-        </a>
+        {props["school.school_url"].includes("https") ? (
+            <a
+              href={props["school.school_url"]}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="btn btn-primary"
+            >
+              Visit their website
+            </a>
+          ) : (
+            <a
+              href={`redirect/${props["school.school_url"]}`}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="btn btn-primary"
+            >
+              Visit their website
+            </a>
+          )}
         <button className="mx-2 btn btn-secondary" data-id={props.id}>
           Add to favorites
         </button>
