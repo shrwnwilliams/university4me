@@ -69,21 +69,25 @@ module.exports = {
       console.log(err);
     }
   },
-  // Find User id
-  // act: function(req, res) {
-  //   User.findById(req.params._id)
-  //     .then(dbUser => res.json(dbUser))
-  //     .catch(err => res.status(422).json(err));
-  // },
+  // ACT User input
   actUpdate: function (req, res) {
     User.findByIdAndUpdate(
       req.params.id,
       { $push: { act: req.body } },
       { new: true, runValidators: true }
     )
-      .then((dbUser) => res.json("hello"))
+      .then((dbAct) => res.json(dbAct))
+      .catch((err) => res.status(422).json(err));
+  },
+  // SAT User input
+  satUpdate: function (req, res) {
+    User.findByIdAndUpdate(
+      req.params.id,
+      { $push: { sat: req.body } },
+      { new: true, runValidators: true }
+    )
+      .then((dbSat) => res.json(dbSat))
       .catch((err) => res.status(422).json(err));
   },
 };
 
-// , {$push: {act: req.body}}, {new: true, runValidators: true}
