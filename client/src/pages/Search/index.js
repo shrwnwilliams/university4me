@@ -38,6 +38,9 @@ class Search extends Component {
   // }
 
   // SearchByName -- of college
+
+  // filterResults = () => {}
+
   handleInputChange = (event) => {
     this.setState({ search: event.target.value });
   };
