@@ -10,6 +10,7 @@ import User from './pages/User';
 import Signup from './pages/Signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OneSchool from "./components/OneSchool";
+import Redirect from "./pages/Redirect";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/search" component={Search} />
           <Route exact path='/profile' component={User} />
           <Route path='/login' component={Signup} />
+          <Route path="/redirect/:url" component={Redirect} />
           <Route path="/:id"><OneSchool /></Route>
           {/* <Route exact path="/login" component={Login} /> */}
           </Switch>

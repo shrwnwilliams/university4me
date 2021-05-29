@@ -102,10 +102,11 @@ function OneSchool() {
             <></>
           ) : (
             <div>
-              <h3>Admission Rate</h3> <p>{`${percentage(schoolState.admissionOverall)}%`}</p>
+              <h3>Admission Rate</h3>{" "}
+              <p>{`${percentage(schoolState.admissionOverall)}%`}</p>
             </div>
           )}
-          
+
           <h3>SAT Scores</h3>
           <p>
             Critical Reading: <span>{schoolState.satReading}</span>
@@ -153,15 +154,25 @@ function OneSchool() {
               Program Year: <span>${schoolState.costProgram}</span>
             </p>
           )}
-          <a
-            href={schoolState.url}
-            target="_blank"
-            rel="noreferer noopener"
-            className="btn btn-primary"
-            className="btn btn-primary"
-          >
-            Visit their website
-          </a>
+          {schoolState.url.includes("https") ? (
+            <a
+              href={schoolState.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="btn btn-primary"
+            >
+              Visit their website
+            </a>
+          ) : (
+            <a
+              href={`redirect/${schoolState.url}`}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="btn btn-primary"
+            >
+              Visit their website
+            </a>
+          )}
         </div>
       </div>
     </div>
