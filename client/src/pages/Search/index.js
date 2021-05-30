@@ -26,6 +26,13 @@ class Search extends Component {
     resultPerPage: 30,
     pageCount: 0,
     lastSearch: "",
+    satEng: 650,
+    satMath: 650,
+    satRead: 650,
+    actEng: 0,
+    actMath: 0,
+    actWrite: 0,
+    actCumulative: 0,
   };
 
   // componentDidMount() {
@@ -39,7 +46,33 @@ class Search extends Component {
 
   // SearchByName -- of college
 
-  // filterResults = () => {}
+// 5. act cumulative
+// 6. act eng
+// 7. act Math
+// 8. act writing
+// 9. sat reading
+// 10. sat Math
+// 11. sat writing
+
+
+  filterNameResultsSat = () => {
+    this.setState({ ...this.state, lastSearch: "name" });
+    API.getByName(this.state.search, this.state.page).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school)=>{
+        let values = Object.values(school);
+          if (values[9] <= this.state.satRead && values[10] <= this.state.satMath && values[11] <= this.state.satEng && values[9, 10, 11] !== null) {
+            return values
+          }
+      })
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools
+      })
+    });
+  };
 
   handleInputChange = (event) => {
     this.setState({ search: event.target.value });
@@ -71,6 +104,11 @@ class Search extends Component {
     event.preventDefault();
     this.getByName();
   };
+
+  handleNameFilterSubmit = (event) => {
+    event.preventDefault();
+    this.filterNameResultsSat();
+  }
 
   // SearchByStates
   handleInputChangeForStates = (event) => {
@@ -139,30 +177,29 @@ class Search extends Component {
     this.setState({ zipcode: event.target.value });
   };
 
-  getByDistance(){
-    this.setState({ ...this.state, lastSearch: "distance" });    
+  getByDistance() {
+    this.setState({ ...this.state, lastSearch: "distance" });
     API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
-    .then((res) => {
-      if (res.data.status === "error") {
-        throw new Error(res.data.message);
-      }
-      console.log(res.data);
-      this.setState({
-        results: res.data.results,
-        error: "",
-        pageCount: Math.ceil(
-          res.data.metadata.total / this.state.resultPerPage
-        ),
-      });
-    })
-    .catch((err) => this.setState({ error: err.message }));
+      .then((res) => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        console.log(res.data);
+        this.setState({
+          results: res.data.results,
+          error: "",
+          pageCount: Math.ceil(
+            res.data.metadata.total / this.state.resultPerPage
+          ),
+        });
+      })
+      .catch((err) => this.setState({ error: err.message }));
   }
 
   handleFormSubmitForDist = (event) => {
     event.preventDefault();
     this.getByDistance();
   };
-
 
   handleNamePageChange = (data) => {
     let selected = data.selected;
@@ -231,6 +268,7 @@ class Search extends Component {
                     <SearchForm
                       handleFormSubmit={this.handleFormSubmit}
                       handleInputChange={this.handleInputChange}
+                      filterNameResults={this.handleNameFilterSubmit}
                       colleges={this.state.colleges}
                     />
                   </Container>
