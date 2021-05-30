@@ -49,58 +49,66 @@ class Search extends Component {
   // 9. sat reading
   // 10. sat Math
   // 11. sat writing
-  
-  
+
   filterNameResultsSat = () => {
     this.setState({ ...this.state, lastSearch: "name" });
     API.getByName(this.state.search, this.state.page).then((res) => {
       this.setState({
         colleges: res.data.results,
       });
-      const filteredSchools = this.state.colleges.filter((school)=>{
+      const filteredSchools = this.state.colleges.filter((school) => {
         let values = Object.values(school);
-        if ( values[9] || values[10] || values[11] !== null){
-        if (values[9] <= this.state.satRead && values[10] <= this.state.satMath && values[11] <= this.state.satEng) {
-          return values
+        if (values[9] || values[10] || values[11] !== null) {
+          if (
+            values[9] <= this.state.satRead &&
+            values[10] <= this.state.satMath &&
+            values[11] <= this.state.satEng
+          ) {
+            return values;
+          }
         }
-      }
-      })
+      });
       console.log(filteredSchools);
       this.setState({
-        results: filteredSchools
-      })
+        results: filteredSchools,
+      });
     });
   };
-  
+
   filterNameResultsAct = () => {
     this.setState({ ...this.state, lastSearch: "name" });
     API.getByName(this.state.search, this.state.page).then((res) => {
       this.setState({
         colleges: res.data.results,
       });
-      const filteredSchools = this.state.colleges.filter((school)=>{
+      const filteredSchools = this.state.colleges.filter((school) => {
         let values = Object.values(school);
-        if(values[5] || values[6] || values [7] || values[8] !== null){
-        if (values[5] <= this.state.actCumulative && values[6] <= this.state.actEng && values[7] <= this.state.actMath && values[8] <= this.state.actWrite) {
-          return values
+        if (values[5] || values[6] || values[7] || values[8] !== null) {
+          if (
+            values[5] <= this.state.actCumulative &&
+            values[6] <= this.state.actEng &&
+            values[7] <= this.state.actMath &&
+            values[8] <= this.state.actWrite
+          ) {
+            return values;
+          }
         }
-      }
-      })
+      });
       console.log(filteredSchools);
       this.setState({
-        results: filteredSchools
-      })
+        results: filteredSchools,
+      });
     });
   };
   // 5. act cumulative
   // 6. act eng
   // 7. act Math
   // 8. act writing
-  
+
   handleInputChange = (event) => {
     this.setState({ search: event.target.value });
   };
-  
+
   // switch case to get all of the info
   getByName() {
     this.setState({ ...this.state, lastSearch: "name" });
@@ -131,14 +139,83 @@ class Search extends Component {
   handleNameFilterSubmitSat = (event) => {
     event.preventDefault();
     this.filterNameResultsSat();
-  }
+  };
 
   handleNameFilterSubmitAct = (event) => {
     event.preventDefault();
-    this.filterNameResultsAct()
-  }
+    this.filterNameResultsAct();
+  };
 
   // SearchByStates
+  // 9. sat reading
+  // 10. sat Math
+  // 11. sat writing
+
+  filterStateResultsSat = () => {
+    this.setState({ ...this.state, lastSearch: "state" });
+    API.getByState(this.state.search, this.state.page).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school) => {
+        let values = Object.values(school);
+        if (values[9] || values[10] || values[11] !== null) {
+          if (
+            values[9] <= this.state.satRead &&
+            values[10] <= this.state.satMath &&
+            values[11] <= this.state.satEng
+          ) {
+            return values;
+          }
+        }
+      });
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools,
+      });
+    });
+  };
+
+  filterStateResultsAct = () => {
+    this.setState({ ...this.state, lastSearch: "state" });
+    API.getByState(this.state.search, this.state.page).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school) => {
+        let values = Object.values(school);
+        if (values[5] || values[6] || values[7] || values[8] !== null) {
+          if (
+            values[5] <= this.state.actCumulative &&
+            values[6] <= this.state.actEng &&
+            values[7] <= this.state.actMath &&
+            values[8] <= this.state.actWrite
+          ) {
+            return values;
+          }
+        }
+      });
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools,
+      });
+    });
+  };
+
+  handleStateFilterSubmitSat = (event) => {
+    event.preventDefault();
+    this.filterStateResultsSat();
+  };
+
+  handleStateFilterSubmitAct = (event) => {
+    event.preventDefault();
+    this.filterStateResultsAct();
+  };
+  // 5. act cumulative
+  // 6. act eng
+  // 7. act Math
+  // 8. act writing
+
   handleInputChangeForStates = (event) => {
     this.setState({ search: event.target.value });
   };
@@ -166,11 +243,79 @@ class Search extends Component {
     event.preventDefault();
     this.getByState();
   };
-
   // SearchByCity
   handleInputChangeForCity = (event) => {
     this.setState({ search: event.target.value });
   };
+
+  // 9. sat reading
+  // 10. sat Math
+  // 11. sat writing
+
+  filterCityResultsSat = () => {
+    this.setState({ ...this.state, lastSearch: "city" });
+    API.getByCity(this.state.search, this.state.page).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school) => {
+        let values = Object.values(school);
+        if (values[9] || values[10] || values[11] !== null) {
+          if (
+            values[9] <= this.state.satRead &&
+            values[10] <= this.state.satMath &&
+            values[11] <= this.state.satEng
+          ) {
+            return values;
+          }
+        }
+      });
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools,
+      });
+    });
+  };
+
+  filterCityResultsAct = () => {
+    this.setState({ ...this.state, lastSearch: "city" });
+    API.getByCity(this.state.search, this.state.page).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school) => {
+        let values = Object.values(school);
+        if (values[5] || values[6] || values[7] || values[8] !== null) {
+          if (
+            values[5] <= this.state.actCumulative &&
+            values[6] <= this.state.actEng &&
+            values[7] <= this.state.actMath &&
+            values[8] <= this.state.actWrite
+          ) {
+            return values;
+          }
+        }
+      });
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools,
+      });
+    });
+  };
+
+  handleCityFilterSubmitSat = (event) => {
+    event.preventDefault();
+    this.filterCityResultsSat();
+  };
+
+  handleCityFilterSubmitAct = (event) => {
+    event.preventDefault();
+    this.filterCityResultsAct();
+  };
+  // 5. act cumulative
+  // 6. act eng
+  // 7. act Math
+  // 8. act writing
 
   getByCity() {
     this.setState({ ...this.state, lastSearch: "city" });
@@ -322,6 +467,8 @@ class Search extends Component {
                       handleInputChangeForStates={
                         this.handleInputChangeForStates
                       }
+                      filterStateResultsSat={this.handleStateFilterSubmitSat}
+                      filterStateResultsAct={this.handleStateFilterSubmitAct}
                       states={this.state.states}
                     />
                   </Container>
@@ -344,6 +491,8 @@ class Search extends Component {
                     <SearchByCity
                       handleFormSubmitForCity={this.handleFormSubmitForCity}
                       handleInputChangeForCity={this.handleInputChangeForCity}
+                      filterCityResultsSat={this.handleCityFilterSubmitSat}
+                      filterCityResultsAct={this.handleCityFilterSubmitAct}
                       cities={this.state.cities}
                     />
                   </Container>
