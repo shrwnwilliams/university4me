@@ -5,7 +5,6 @@ import SearchForm from "../../components/SearchForm";
 import SearchByCity from "../../components/SearchByCity";
 import SearchByStates from "../../components/SearchByStates";
 import SearchByDistance from "../../components/SearchByDistance";
-// import SearchResults from "../components/SearchResults";
 import { Accordion, Button, Card } from "react-bootstrap";
 import CollegeCard from "../../components/CollegeCard";
 import ReactPaginate from "react-paginate";
@@ -36,19 +35,35 @@ class Search extends Component {
   };
 
   // componentDidMount() {
-  //   API.getAll()
-  //     .then((res) => {
-  //       console.log(res.data.metadata.total);
-  //       this.setState({ colleges: res.data.results, pageCount: Math.ceil(res.data.metadata.total / this.state.resultPerPage) });
-  //     })
-  //     .catch((err) => console.log(err));
+
+  // WHEN GET USER INFO IS COMPLETED, WE SET THE SAT AND ACT SCORES TO THE STATE
+
   // }
 
-  // SearchByName -- of college
+  // Get by name
+  handleInputChange = (event) => {
+    this.setState({ search: event.target.value });
+  };
 
-  // 9. sat reading
-  // 10. sat Math
-  // 11. sat writing
+  getByName() {
+    this.setState({ ...this.state, lastSearch: "name" });
+    API.getByName(this.state.search, this.state.page)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        this.setState({
+          results: res.data.results,
+          error: "",
+          pageCount: Math.ceil(
+            res.data.metadata.total / this.state.resultPerPage
+          ),
+        });
+        console.log(this.state.results);
+      })
+      .catch((err) => this.setState({ error: err.message }));
+  }
 
   filterNameResultsSat = () => {
     this.setState({ ...this.state, lastSearch: "name" });
@@ -100,36 +115,6 @@ class Search extends Component {
       });
     });
   };
-  // 5. act cumulative
-  // 6. act eng
-  // 7. act Math
-  // 8. act writing
-
-  handleInputChange = (event) => {
-    this.setState({ search: event.target.value });
-  };
-
-  // switch case to get all of the info
-  getByName() {
-    this.setState({ ...this.state, lastSearch: "name" });
-    API.getByName(this.state.search, this.state.page)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        // console.log(res.data);
-        this.setState({
-          results: res.data.results,
-          error: "",
-          pageCount: Math.ceil(
-            res.data.metadata.total / this.state.resultPerPage
-          ),
-        });
-        console.log(this.state.results);
-      })
-      .catch((err) => this.setState({ error: err.message }));
-  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -146,10 +131,39 @@ class Search extends Component {
     this.filterNameResultsAct();
   };
 
-  // SearchByStates
-  // 9. sat reading
-  // 10. sat Math
-  // 11. sat writing
+  handleNamePageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      this.getByName();
+    });
+  };
+
+  // Search By State
+  handleInputChangeForStates = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  getByState() {
+    this.setState({ ...this.state, lastSearch: "state" });
+    API.getByState(this.state.search, this.state.page)
+      .then((res) => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        console.log(res.data);
+        this.setState({
+          results: res.data.results,
+          error: "",
+          pageCount: Math.ceil(
+            res.data.metadata.total / this.state.resultPerPage
+          ),
+        });
+      })
+      .catch((err) => this.setState({ error: err.message }));
+  }
 
   filterStateResultsSat = () => {
     this.setState({ ...this.state, lastSearch: "state" });
@@ -202,6 +216,11 @@ class Search extends Component {
     });
   };
 
+  handleFormSubmitForStates = (event) => {
+    event.preventDefault();
+    this.getByState();
+  };
+
   handleStateFilterSubmitSat = (event) => {
     event.preventDefault();
     this.filterStateResultsSat();
@@ -211,18 +230,25 @@ class Search extends Component {
     event.preventDefault();
     this.filterStateResultsAct();
   };
-  // 5. act cumulative
-  // 6. act eng
-  // 7. act Math
-  // 8. act writing
 
-  handleInputChangeForStates = (event) => {
+  handleStatePageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      this.getByState();
+    });
+  };
+
+  // SearchByCity
+  handleInputChangeForCity = (event) => {
     this.setState({ search: event.target.value });
   };
 
-  getByState() {
-    this.setState({ ...this.state, lastSearch: "state" });
-    API.getByState(this.state.search, this.state.page)
+  getByCity() {
+    this.setState({ ...this.state, lastSearch: "city" });
+    API.getByCity(this.state.search, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -238,19 +264,6 @@ class Search extends Component {
       })
       .catch((err) => this.setState({ error: err.message }));
   }
-
-  handleFormSubmitForStates = (event) => {
-    event.preventDefault();
-    this.getByState();
-  };
-  // SearchByCity
-  handleInputChangeForCity = (event) => {
-    this.setState({ search: event.target.value });
-  };
-
-  // 9. sat reading
-  // 10. sat Math
-  // 11. sat writing
 
   filterCityResultsSat = () => {
     this.setState({ ...this.state, lastSearch: "city" });
@@ -302,6 +315,10 @@ class Search extends Component {
       });
     });
   };
+  handleFormSubmitForCity = (event) => {
+    event.preventDefault();
+    this.getByCity();
+  };
 
   handleCityFilterSubmitSat = (event) => {
     event.preventDefault();
@@ -312,14 +329,29 @@ class Search extends Component {
     event.preventDefault();
     this.filterCityResultsAct();
   };
-  // 5. act cumulative
-  // 6. act eng
-  // 7. act Math
-  // 8. act writing
 
-  getByCity() {
-    this.setState({ ...this.state, lastSearch: "city" });
-    API.getByCity(this.state.search, this.state.page)
+  handleCityPageChange = (data) => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected);
+
+    this.setState({ page: offset }, () => {
+      console.log(this.state.page);
+      this.getByCity();
+    });
+  };
+
+  // Search By Distance from Zipcode
+  handleInputChangeForDist = (event) => {
+    this.setState({ distance: event.target.value });
+  };
+
+  handleInputChangeForZip = (event) => {
+    this.setState({ zipcode: event.target.value });
+  };
+
+  getByDistance() {
+    this.setState({ ...this.state, lastSearch: "distance" });
+    API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
       .then((res) => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -336,12 +368,6 @@ class Search extends Component {
       .catch((err) => this.setState({ error: err.message }));
   }
 
-  handleFormSubmitForCity = (event) => {
-    event.preventDefault();
-    this.getByCity();
-  };
-
-  // SearchByDistance and Zipcode
   filterDistanceResultsSat = () => {
     this.setState({ ...this.state, lastSearch: "distance" });
     API.getByDistance(
@@ -401,6 +427,11 @@ class Search extends Component {
     });
   };
 
+  handleFormSubmitForDist = (event) => {
+    event.preventDefault();
+    this.getByDistance();
+  };
+
   handleDistanceFilterSubmitSat = (event) => {
     event.preventDefault();
     this.filterDistanceResultsSat();
@@ -411,83 +442,13 @@ class Search extends Component {
     this.filterDistanceResultsAct();
   };
 
-  handleInputChangeForDist = (event) => {
-    this.setState({ distance: event.target.value });
-  };
-
-  handleInputChangeForZip = (event) => {
-    this.setState({ zipcode: event.target.value });
-  };
-
-  getByDistance() {
-    this.setState({ ...this.state, lastSearch: "distance" });
-    API.getByDistance(this.state.zipcode, this.state.distance, this.state.page)
-      .then((res) => {
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        console.log(res.data);
-        this.setState({
-          results: res.data.results,
-          error: "",
-          pageCount: Math.ceil(
-            res.data.metadata.total / this.state.resultPerPage
-          ),
-        });
-      })
-      .catch((err) => this.setState({ error: err.message }));
-  }
-
-  handleFormSubmitForDist = (event) => {
-    event.preventDefault();
-    this.getByDistance();
-  };
-
-  handleNamePageChange = (data) => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected);
-
-    this.setState({ page: offset }, () => {
-      console.log(this.state.page);
-      // window.scrollTo(0,0);
-      this.getByName();
-      // this.scrollToTop();
-    });
-  };
-
-  handleStatePageChange = (data) => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected);
-
-    this.setState({ page: offset }, () => {
-      console.log(this.state.page);
-      // window.scrollTo(0,0);
-      this.getByState();
-      // this.scrollToTop();
-    });
-  };
-
-  handleCityPageChange = (data) => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected);
-
-    this.setState({ page: offset }, () => {
-      console.log(this.state.page);
-      // window.scrollTo(0,0);
-      this.getByCity();
-      // this.scrollToTop();
-    });
-  };
-
   handleDistPageChange = (data) => {
     let selected = data.selected;
     let offset = Math.ceil(selected);
 
     this.setState({ page: offset }, () => {
       console.log(this.state.page);
-      // window.scrollTo(0,0);
       this.getByDistance();
-      // this.scrollToTop();
     });
   };
 
