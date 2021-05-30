@@ -37,6 +37,20 @@ function SearchByDistance(props) {
             >
               Search
             </button>
+            <button
+            type="submit"
+            onClick={props.filterDistanceResultsSat}
+            className="btn btn-success"
+          >
+            Search by SAT
+          </button>
+          <button
+            type="submit"
+            onClick={props.filterDistanceResultsAct}
+            className="btn btn-success"
+          >
+            Search by ACT
+          </button>
             </div>
             
           </div>
