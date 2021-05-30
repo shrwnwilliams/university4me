@@ -9,7 +9,7 @@ function Redirect (props){
             <h1>Uh-oh~!</h1>
             <h3>Look's like that school's website isn't very secure!</h3>
             <h5>If you'd like, you can continue onwards to their website by clicking the button bellow.</h5>
-            <button><a href={`//${url}`}>Hello</a></button>
+            <button><a href={`//${url}`}>Visit the site</a></button>
         </div>
     )
 }
