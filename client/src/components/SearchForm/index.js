@@ -30,6 +30,13 @@ function SearchForm(props) {
           >
             Search
           </button>
+          <button
+            type="submit"
+            onClick={props.filterNameResults}
+            className="btn btn-success"
+          >
+            Search by SAT
+          </button>
         </div>
       </div>
     </form>
