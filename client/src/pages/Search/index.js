@@ -29,10 +29,10 @@ class Search extends Component {
     satEng: 650,
     satMath: 650,
     satRead: 650,
-    actEng: 0,
-    actMath: 0,
-    actWrite: 0,
-    actCumulative: 0,
+    actEng: 30,
+    actMath: 30,
+    actWrite: 30,
+    actCumulative: 30,
   };
 
   // componentDidMount() {
@@ -46,15 +46,11 @@ class Search extends Component {
 
   // SearchByName -- of college
 
-// 5. act cumulative
-// 6. act eng
-// 7. act Math
-// 8. act writing
-// 9. sat reading
-// 10. sat Math
-// 11. sat writing
-
-
+  // 9. sat reading
+  // 10. sat Math
+  // 11. sat writing
+  
+  
   filterNameResultsSat = () => {
     this.setState({ ...this.state, lastSearch: "name" });
     API.getByName(this.state.search, this.state.page).then((res) => {
@@ -63,9 +59,11 @@ class Search extends Component {
       });
       const filteredSchools = this.state.colleges.filter((school)=>{
         let values = Object.values(school);
-          if (values[9] <= this.state.satRead && values[10] <= this.state.satMath && values[11] <= this.state.satEng && values[9, 10, 11] !== null) {
-            return values
-          }
+        if ( values[9] || values[10] || values[11] !== null){
+        if (values[9] <= this.state.satRead && values[10] <= this.state.satMath && values[11] <= this.state.satEng) {
+          return values
+        }
+      }
       })
       console.log(filteredSchools);
       this.setState({
@@ -73,11 +71,36 @@ class Search extends Component {
       })
     });
   };
-
+  
+  filterNameResultsAct = () => {
+    this.setState({ ...this.state, lastSearch: "name" });
+    API.getByName(this.state.search, this.state.page).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school)=>{
+        let values = Object.values(school);
+        if(values[5] || values[6] || values [7] || values[8] !== null){
+        if (values[5] <= this.state.actCumulative && values[6] <= this.state.actEng && values[7] <= this.state.actMath && values[8] <= this.state.actWrite) {
+          return values
+        }
+      }
+      })
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools
+      })
+    });
+  };
+  // 5. act cumulative
+  // 6. act eng
+  // 7. act Math
+  // 8. act writing
+  
   handleInputChange = (event) => {
     this.setState({ search: event.target.value });
   };
-
+  
   // switch case to get all of the info
   getByName() {
     this.setState({ ...this.state, lastSearch: "name" });
@@ -105,9 +128,14 @@ class Search extends Component {
     this.getByName();
   };
 
-  handleNameFilterSubmit = (event) => {
+  handleNameFilterSubmitSat = (event) => {
     event.preventDefault();
     this.filterNameResultsSat();
+  }
+
+  handleNameFilterSubmitAct = (event) => {
+    event.preventDefault();
+    this.filterNameResultsAct()
   }
 
   // SearchByStates
@@ -268,7 +296,8 @@ class Search extends Component {
                     <SearchForm
                       handleFormSubmit={this.handleFormSubmit}
                       handleInputChange={this.handleInputChange}
-                      filterNameResults={this.handleNameFilterSubmit}
+                      filterNameResultsSat={this.handleNameFilterSubmitSat}
+                      filterNameResultsAct={this.handleNameFilterSubmitAct}
                       colleges={this.state.colleges}
                     />
                   </Container>
