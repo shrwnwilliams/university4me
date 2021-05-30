@@ -32,10 +32,17 @@ function SearchForm(props) {
           </button>
           <button
             type="submit"
-            onClick={props.filterNameResults}
+            onClick={props.filterNameResultsSat}
             className="btn btn-success"
           >
             Search by SAT
+          </button>
+          <button
+            type="submit"
+            onClick={props.filterNameResultsAct}
+            className="btn btn-success"
+          >
+            Search by ACT
           </button>
         </div>
       </div>
