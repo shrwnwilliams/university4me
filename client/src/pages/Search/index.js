@@ -342,6 +342,75 @@ class Search extends Component {
   };
 
   // SearchByDistance and Zipcode
+  filterDistanceResultsSat = () => {
+    this.setState({ ...this.state, lastSearch: "distance" });
+    API.getByDistance(
+      this.state.zipcode,
+      this.state.distance,
+      this.state.page
+    ).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school) => {
+        let values = Object.values(school);
+        if (values[9] || values[10] || values[11] !== null) {
+          if (
+            values[9] <= this.state.satRead &&
+            values[10] <= this.state.satMath &&
+            values[11] <= this.state.satEng
+          ) {
+            return values;
+          }
+        }
+      });
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools,
+      });
+    });
+  };
+
+  filterDistanceResultsAct = () => {
+    this.setState({ ...this.state, lastSearch: "distance" });
+    API.getByDistance(
+      this.state.zipcode,
+      this.state.distance,
+      this.state.page
+    ).then((res) => {
+      this.setState({
+        colleges: res.data.results,
+      });
+      const filteredSchools = this.state.colleges.filter((school) => {
+        let values = Object.values(school);
+        if (values[5] || values[6] || values[7] || values[8] !== null) {
+          if (
+            values[5] <= this.state.actCumulative &&
+            values[6] <= this.state.actEng &&
+            values[7] <= this.state.actMath &&
+            values[8] <= this.state.actWrite
+          ) {
+            return values;
+          }
+        }
+      });
+      console.log(filteredSchools);
+      this.setState({
+        results: filteredSchools,
+      });
+    });
+  };
+
+  handleDistanceFilterSubmitSat = (event) => {
+    event.preventDefault();
+    this.filterDistanceResultsSat();
+  };
+
+  handleDistanceFilterSubmitAct = (event) => {
+    event.preventDefault();
+    this.filterDistanceResultsAct();
+  };
+
   handleInputChangeForDist = (event) => {
     this.setState({ distance: event.target.value });
   };
@@ -516,6 +585,12 @@ class Search extends Component {
                       handleFormSubmitForDist={this.handleFormSubmitForDist}
                       handleInputChangeForDist={this.handleInputChangeForDist}
                       handleInputChangeForZip={this.handleInputChangeForZip}
+                      filterDistanceResultsSat={
+                        this.handleDistanceFilterSubmitSat
+                      }
+                      filterDistanceResultsAct={
+                        this.handleDistanceFilterSubmitAct
+                      }
                       distance={this.state.distance}
                       zipcode={this.state.zipcode}
                     />
