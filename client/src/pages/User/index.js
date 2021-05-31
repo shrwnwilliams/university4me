@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+// import { render } from "react-dom";
+import "./user.css";
 import { actScores, satScores } from '../../actions/scores'
+// import { get } from "mongoose";
 
 const initialsState = {
   math: "",
@@ -38,6 +42,11 @@ function User() {
   var getUser = JSON.parse(localStorage.getItem("profile"));
   var username = getUser.result.username;
 
+  var getUser = JSON.parse(localStorage.getItem("profile"));
+  var userID = getUser.result["_id"];
+  console.log(userID)
+  
+
   return (
     <div>
       <div className="backdrop">
@@ -45,6 +54,7 @@ function User() {
           <div className="userinfo">
             <div className="col-sm-6">
               <h3>Username: {username}</h3>
+              <h3>id: {}</h3>
             </div>
             <div className="col-sm-6">
             <h5>{isAct ? "ACT" : "SAT"}</h5>
@@ -115,7 +125,7 @@ function User() {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
       </div>
     </div>
