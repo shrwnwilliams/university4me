@@ -59,7 +59,7 @@ function CollegeCardBody(props) {
         )}
         <button
           className="mx-2 btn btn-secondary"
-          onClick={handleAddToFav}
+          // onClick={handleAddToFav}
           data-id={props.id}
         >
           Add to favorites
