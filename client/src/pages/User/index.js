@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
-// import { render } from "react-dom";
-import style from "./user.css";
 import { actScores, satScores } from '../../actions/scores'
 
 const initialsState = {
