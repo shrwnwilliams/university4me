@@ -20,5 +20,11 @@ export default {
   getByDistance: function (zip, dis, page) {
     return axios.get("api/school/dis/" + zip + "/" + dis + "/" + page);
   },
+  handleAddToFav: function (username) {
+    return axios.put("api/user/" + username + "/schools");
+  },
+  getUserInfo: function(username) {
+    return axios.get("api/user/" + username);
+  }
 };
 

@@ -13,14 +13,14 @@ class User extends Component {
   }
 
   handleChangeSat = () => {
-    console.log('SAT Mode');
+    console.log("SAT Mode");
     this.setState({
       mode: "sat",
     });
   };
 
   handleChangeAct = () => {
-    console.log('ACT Mode');
+    console.log("ACT Mode");
     this.setState({
       mode: "act",
     });

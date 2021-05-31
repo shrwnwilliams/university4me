@@ -89,15 +89,19 @@ module.exports = {
       .then((dbSat) => res.json(dbSat))
       .catch((err) => res.status(422).json(err));
   },
-// Saved Schools
-schoolsUpdate: function (req, res) {
-  User.findByIdAndUpdate(
-    req.params.id,
-    { $push: { schools: req.body } },
-    { new: true, runValidators: true }
-  )
-    .then((dbSchools) => res.json(dbSchools))
-    .catch((err) => res.status(422).json(err));
-},
+  // Saved Schools
+  schoolsUpdate: function (req, res) {
+    User.findOneAndUpdate(
+      { username: req.params.username },
+      { $push: { schools: req.body } },
+      { new: true, runValidators: true }
+    )
+      .then((dbSchools) => res.json(dbSchools))
+      .catch((err) => res.status(422).json(err));
+  },
+  getUserInfo: function (req, res) {
+    User.findOne({ username: req.params.username })
+      .then((dbUserID) => res.json(dbUserID))
+      .catch((err) => res.status(422).json(err));
+  },
 };
-
