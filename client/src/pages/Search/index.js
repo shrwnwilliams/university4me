@@ -34,11 +34,24 @@ class Search extends Component {
     actCumulative: 30,
   };
 
-  // componentDidMount() {
+  componentDidMount() {
+    var getUser = JSON.parse(localStorage.getItem("profile"));
+    var username = getUser.result.username;
+    API.getUserInfo(username).then((res) => {
+      console.log(res.data);
+      this.setState({
+        satEng: res.data.sat[0].writing,
+        satMath: res.data.sat[0].math,
+        satRead: res.data.sat[0].english,
+        actEng: res.data.act[0].english,
+        actMath: res.data.act[0].math,
+        actWrite: res.data.act[0].writing,
+        actCumulative: res.data.act[0].cumulative
+      })
+      console.log(this.state)
+    })
 
-  // WHEN GET USER INFO IS COMPLETED, WE SET THE SAT AND ACT SCORES TO THE STATE
-
-  // }
+  }
 
   // Get by name
   handleInputChange = (event) => {

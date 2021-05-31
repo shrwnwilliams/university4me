@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { render } from "react-dom";
+import React from "react";
 import "./style.css";
-import background from "../../img/image1.jpg";
 
 const Homepage = () => {
   //   const {imgClassList} = props;

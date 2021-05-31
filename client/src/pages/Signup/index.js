@@ -16,7 +16,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("This is in signup index", formData)
+    // console.log("This is in signup index", formData)
 
     if (isSignup) {
       dispatch(signup(formData, history))

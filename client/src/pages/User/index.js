@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 // import { render } from "react-dom";
 import "./user.css";
 import { actScores, satScores } from '../../actions/scores'
-import { get } from "mongoose";
+// import { get } from "mongoose";
 
 const initialsState = {
   math: "",
@@ -76,7 +76,7 @@ function User() {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="english"
+                      placeholder={isAct ? "english:" : "reading:"}
                       name="english"
                       // value={this.state.satReading}
                       onChange={handleChange}
