@@ -1,5 +1,12 @@
 const router = require("express").Router();
-const { signin, signup, actUpdate, satUpdate, schoolsUpdate } = require("../../controllers/user.js");
+const {
+  signin,
+  signup,
+  actUpdate,
+  satUpdate,
+  schoolsUpdate,
+  getUserInfo,
+} = require("../../controllers/user.js");
 
 router.post("/login", signin);
 router.post("/signup", signup);
@@ -9,9 +16,10 @@ router.post("/signup", signup);
 
 router.put("/:id/act", actUpdate);
 router.put("/:id/sat", satUpdate);
-router.put("/:id/schools", schoolsUpdate)
+router.put("/:username/schools", schoolsUpdate);
+
+router.get("/:username", getUserInfo);
 
 // router.post("/sat", sat);
 
- module.exports = router;
-
+module.exports = router;
