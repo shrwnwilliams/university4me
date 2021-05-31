@@ -7,9 +7,9 @@ const scoresReducer = (state = {testData: null}, action) => {
     
           return { ...state, testData: action.data, loading: false, errors: null };
         case actionType.SAT:
-          localStorage.clear();
+            localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
     
-          return { ...state, testData: null, loading: false, errors: null };
+          return { ...state, testData: action.data, loading: false, errors: null };
         default:
           return state;
       }

@@ -1,24 +1,31 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import style from "./user.css";
+import { actScores, satScores } from '../../actions/scores'
 
-const initialState = {
-  act: [{ math: "", english: "", writing: "", cumulative: "" }],
-  sat: [{ math: "", english: "", writing: "" }],
+const initialsState = {
+  math: "",
+  english: "",
+  writing: "",
+  cumulative: ""
 };
 
 function User() {
-  const [testData, setTestData] = useState(initialState);
+  const [testData, setTestData] = useState(initialsState);
   const [isAct, setIsAct] = useState(true);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if(isACT) {
-    //   dispatch(actScore(testData, history))
-    // } else {
-    //   dispatch(satScore(testData, history))
-    // }
+    if(isAct) {
+      dispatch(actScores(testData, history))
+    } else {
+      dispatch(satScores(testData, history))
+    }
   };
 
   const handleChange = (e) => {
@@ -30,14 +37,17 @@ function User() {
     setIsAct((prevIsAct) => !prevIsAct);
     console.log(isAct);
   };
+
+  var getUser = JSON.parse(localStorage.getItem("profile"));
+  var username = getUser.result.username;
+
   return (
     <div>
       <div className="backdrop">
         <div className="overlay">
           <div className="userinfo">
             <div className="col-sm-6">
-              <h3>Username: {User.username}</h3>
-              {/* <h4>User-Id: {User.userid}</h4> */}
+              <h3>Username: {username}</h3>
             </div>
             <div className="col-sm-6">
             <h5>{isAct ? "ACT" : "SAT"}</h5>
@@ -55,12 +65,12 @@ function User() {
                     />
                   </label>
                   <label>
-                    Reading:
+                    {isAct ? "English:" : "Reading:"}
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="reading"
-                      name="reading"
+                      placeholder="english"
+                      name="english"
                       // value={this.state.satReading}
                       onChange={handleChange}
                     />
@@ -95,8 +105,8 @@ function User() {
                   </button>
                   <button onClick={switchMode}>
               {isAct
-                ? "Have ACT scores? Click Here."
-                : "Have SAT scores? Click Here."}
+                ? "Have SAT scores? Click Here."
+                : "Have ACT scores? Click Here."}
             </button>
                 </form>
               </div>
