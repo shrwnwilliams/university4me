@@ -69,7 +69,7 @@ function User() {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="english"
+                      placeholder={isAct ? "english:" : "reading:"}
                       name="english"
                       // value={this.state.satReading}
                       onChange={handleChange}
