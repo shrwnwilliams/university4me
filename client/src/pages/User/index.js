@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
-// import { render } from "react-dom";
-import style from "./user.css";
 import { actScores, satScores } from '../../actions/scores'
 
 const initialsState = {
@@ -69,7 +66,7 @@ function User() {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="english"
+                      placeholder={isAct ? "english:" : "reading:"}
                       name="english"
                       // value={this.state.satReading}
                       onChange={handleChange}
