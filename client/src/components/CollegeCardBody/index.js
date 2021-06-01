@@ -5,26 +5,26 @@ import API from "../../utils/API";
 function CollegeCardBody(props) {
   // console.log(props)
   //retrieving from local storage
-  var getUser = JSON.parse(localStorage.getItem("profile"));
-  var username = getUser.result.username;
-  console.log("from collegecardbody", username);
+  // var getUser = JSON.parse(localStorage.getItem("profile"));
+  // var username = getUser.result.username;
+  // console.log("from collegecardbody", username);
 
-  function schoolsUpdate(){
-    alert(props["school.name"]);
-    API.handleAddToFav(username, {
-      schoolID: props.id,
-      name: props["school.name"],
-      city: props["school.city"],
-      state: props["school.state"],
-      zipcode: props["school.zip"],
-      url: props["school.school_url"],
-    });
-  }
-  //Add To Favorites Button Function
-  const handleAddToFav = (event) => {
-    event.preventDefault();
-    schoolsUpdate();
-  };
+  // function schoolsUpdate(){
+  //   alert(props["school.name"]);
+  //   API.handleAddToFav(username, {
+  //     schoolID: props.id,
+  //     name: props["school.name"],
+  //     city: props["school.city"],
+  //     state: props["school.state"],
+  //     zipcode: props["school.zip"],
+  //     url: props["school.school_url"],
+  //   });
+  // }
+  // //Add To Favorites Button Function
+  // const handleAddToFav = (event) => {
+  //   event.preventDefault();
+  //   schoolsUpdate();
+  // };
 
   return (
     <div className="card my-3">
@@ -59,7 +59,7 @@ function CollegeCardBody(props) {
         )}
         <button
           className="mx-2 btn btn-secondary"
-          onClick={handleAddToFav}
+          // onClick={handleAddToFav}
           data-id={props.id}
         >
           Add to favorites
