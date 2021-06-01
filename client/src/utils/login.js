@@ -20,6 +20,7 @@ API.interceptors.request.use((req) => {
 
 export const signIn = (formData) => API.post('/api/user/login', formData);
 export const signUp = (formData) => API.post('/api/user/signup', formData);
+
 export const act = (testData, id) => API.put('/api/user/' + id + '/act', testData);
 export const sat = (testData, id) => API.put('/api/user/' + id + '/sat', testData);
 // ' + userID + '
