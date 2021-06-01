@@ -19,6 +19,7 @@ function User() {
   const [isAct, setIsAct] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,8 +42,6 @@ function User() {
 
   var getUser = JSON.parse(localStorage.getItem("profile"));
   var username = getUser.result.username;
-
-  var getUser = JSON.parse(localStorage.getItem("profile"));
   var userID = getUser.result["_id"];
   console.log(userID)
   

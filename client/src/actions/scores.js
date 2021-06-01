@@ -8,10 +8,10 @@ export const actScores = (testData, router) => async (dispatch) => {
      var id = getUser.result["_id"];
         console.log("give me the deets", testData)
         const { data } = await api.act(testData, id);
-        localStorage.setItem('profile', JSON.stringify(data))
+        // localStorage.setItem('profile', JSON.stringify(data))
         dispatch({ type: ACT, data })
 
-        router.push('/search');
+        router.push('/');
     } catch (err) {
         console.log(err);
     }
@@ -28,7 +28,7 @@ export const satScores = (testData, router) => async (dispatch) => {
 
         dispatch({ type: SAT, data })
 
-        router.push('/search');
+        router.push('/');
     } catch (err) {
         console.log(err);
     }
