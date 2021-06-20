@@ -11,6 +11,9 @@ import ReactPaginate from "react-paginate";
 import e from "cors";
 import "./style.css";
 
+// reset pagination on new search
+// if state.lastsearch !== "last search"
+// set state to 0
 class Search extends Component {
   state = {
     search: "",
@@ -59,6 +62,9 @@ class Search extends Component {
   };
 
   getByName() {
+    if (this.state.lastSearch !== "name"){
+      this.setState({...this.state, page: 0})
+    }
     this.setState({ ...this.state, lastSearch: "name" });
     API.getByName(this.state.search, this.state.page)
       .then((res) => {
